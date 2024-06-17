@@ -3,6 +3,4 @@
     <dimen name = "standard" >16.sp</dimen>
     <dimen name = "lowerStandard" >14.sp</dimen>
     <dimen name = "upperStandard" >30.sp</dimen>
-
-
 </resources>
