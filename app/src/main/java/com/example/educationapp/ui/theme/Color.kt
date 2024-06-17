@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 
 val BackField = Color(0xFFF6F6F6)
 val Primary_Green = Color(0xFF5DB075)
-val TextFieldBackground = Color(0xFFE8E8E8)
+val TextFieldBackground = Color(0xFFF6F6F6)
 val TextFieldText = Color(0xFFBDBDBD)
+val DarkerGray = Color(0xFFE8E8E8)
 
 // Android Colors
 
