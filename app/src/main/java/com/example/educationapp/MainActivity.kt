@@ -28,7 +28,9 @@ class MainActivity : ComponentActivity() {
                     composable("login"){
                         LogIn(navController)
                     }
-
+                    composable("signup"){
+                        SignUp(navController)
+                    }
 
                     }
                 }
