@@ -93,9 +93,9 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
                     modifier = Modifier.clickable {
                         navController.popBackStack()
                     })
-                Spacer(modifier = Modifier.width(56.dp))
+                Spacer(modifier = Modifier.width(72.dp))
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
-                Spacer(modifier = Modifier.width(56.dp))
+                Spacer(modifier = Modifier.width(72.dp))
                 Text(text = "Filter",
                     fontSize = 16.sp,
                     fontFamily = Inter,

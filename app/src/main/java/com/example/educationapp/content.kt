@@ -103,6 +103,9 @@ fun ConteudoAula(title: String, description: String){
     }
 }
 
+@Composable
+fun Caurosel(){}
+
 @Preview
 @Composable
 fun ConteudoAula(){

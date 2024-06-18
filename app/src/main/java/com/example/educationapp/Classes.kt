@@ -42,7 +42,9 @@ fun Classes(navController: NavController){
         ConteudoAula(title = "Python", description = "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr " )
 
 
+
     }
+
 
 }
 @Preview
