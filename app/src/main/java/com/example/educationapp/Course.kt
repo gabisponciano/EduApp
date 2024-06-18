@@ -38,32 +38,33 @@ fun Course(navController: NavController){
         .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally){
 
-        HeaderCourse(text = "Course" , navController)
+        HeaderCourse(text = "Course" , navController, title = "Log Out")
 
         SearchBarUi(query = query,
             onQueryChange = {query = it},
             )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi." )
+        Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.",navController = rememberNavController() )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.")
+        Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.")
+        Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.")
+        Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
 
         Box(modifier = Modifier
-            .height(350.dp)
-            .width(350.dp)
+            .height(227.98.dp)
+            .width(343.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(BackField)
+            .clickable { navController.navigate("classes") }
         )
 
     }

@@ -1,6 +1,7 @@
 package com.example.educationapp
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,9 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.Inter
 
@@ -32,6 +35,7 @@ fun Content(
     cornerRadius: Dp = 10.dp,
     spacing: Dp = 28.dp,
     rowWidth: Dp = 320.dp,
+    navController: NavController
 ){
     Column (){
         Row(
@@ -52,6 +56,7 @@ fun Content(
                 modifier = Modifier
                     .height(90.dp)
                     .width(220.dp)
+                    .clickable { navController.navigate("classes") }
             ) {
                 Column {
                     Text(title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, fontFamily = Inter)
@@ -67,4 +72,39 @@ fun Content(
         Divider(color = BackField, thickness = 1.dp, modifier = Modifier.width(277.dp))
     }
 
+}
+@Composable
+fun ConteudoAula(title: String, description: String){
+    Column (){
+        Box(modifier = Modifier
+            .height(240.dp)
+            .width(343.dp)
+            .clip(RoundedCornerShape(8.dp))
+            .background(BackField)
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        Box(
+            modifier = Modifier
+                .height(70.dp)
+                .width(220.dp)
+
+        ) {
+            Column {
+                Text(title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, fontFamily = Inter)
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    description,
+                    fontSize = 14.sp,
+                    fontFamily = Inter
+                )
+            }
+        }
+
+    }
+}
+
+@Preview
+@Composable
+fun ConteudoAula(){
+    ConteudoAula(title = " Não sei", description = "cnjkndkjbf,vfj")
 }

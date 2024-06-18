@@ -74,7 +74,7 @@ fun HeaderSign(text: String, navController: NavController){
 }
 
 @Composable
-fun HeaderCourse(text: String, navController: NavController){
+fun HeaderCourse(text: String, navController: NavController, title: String){
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(20.dp),
@@ -85,13 +85,13 @@ fun HeaderCourse(text: String, navController: NavController){
     {
         Column (horizontalAlignment = Alignment.CenterHorizontally){
             Row(verticalAlignment = Alignment.CenterVertically){
-                Text(text = "Log Out",
+                Text(text = title,
                     fontSize = 16.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.SemiBold,
                     color = Primary_Green,
                     modifier = Modifier.clickable {
-                        navController.navigate("login")
+                        navController.popBackStack()
                     })
                 Spacer(modifier = Modifier.width(56.dp))
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
