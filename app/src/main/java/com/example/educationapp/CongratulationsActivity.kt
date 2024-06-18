@@ -37,7 +37,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.educationapp.components.CustomToggle
 import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
@@ -123,7 +122,7 @@ fun EducationAppLayout() {
 
 @Preview(showBackground = true)
 @Composable
-fun TipCalculatorPreview() {
+fun CongratulationsActivityPreview() {
     EducationAppTheme {
         EducationAppLayout()
     }

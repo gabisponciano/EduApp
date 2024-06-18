@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EducationApp"
         tools:targetApi="31">
-        <activity android:name=".CongratulationsActivity"
+        <activity android:name=".CongratulationsActivity"/>
+        <activity android:name=".ProfileActivity"/>
         <activity
-            android:name=".ProfileActivity"
+            android:name=".SupportActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.EducationApp">

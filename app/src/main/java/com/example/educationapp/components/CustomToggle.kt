@@ -1,6 +1,7 @@
 package com.example.educationapp.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -54,7 +55,7 @@ fun CustomToggle(
                 Text(
                     text = option,
                     fontFamily = Inter,
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = FontWeight.SemiBold,
                     color = if (selectedOption.value == option) {
                         textColor
                     } else buttonColor
