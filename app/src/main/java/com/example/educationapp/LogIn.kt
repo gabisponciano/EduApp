@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.HeaderLog
+import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
@@ -66,17 +67,23 @@ fun LogIn(navController: NavController){
                 label = { Text(text = ("Email"), color = TextFieldText) },
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = TextFieldBackground,
-                    unfocusedContainerColor = TextFieldBackground,
+                    focusedContainerColor = BackField,
+                    unfocusedContainerColor = BackField,
                 ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                modifier = Modifier.width(346.dp)
+
             )
 
-            Spacer(modifier = Modifier.height(15.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             OutlinedTextField(value = password,
                 onValueChange = {password = it},
                 singleLine = true,
                 label = { Text(text = "Password", color = TextFieldText)},
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = BackField,
+                    unfocusedContainerColor = BackField,
+                ),
                 visualTransformation =
                     if(showPassword){
                         VisualTransformation.None
@@ -99,7 +106,8 @@ fun LogIn(navController: NavController){
                             modifier = Modifier.clickable { showPassword = true }
                         )
                     }
-                }
+                },
+                modifier = Modifier.width(346.dp)
                 )
             Spacer(modifier = Modifier.height(150.dp))
             Button(onClick = {
@@ -114,7 +122,7 @@ fun LogIn(navController: NavController){
                 colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
                 modifier = Modifier
                     .height(65.dp)
-                    .width(320.dp),
+                    .width(343.dp),
                 ) {
                 Text(text = "Log In",
                    fontSize = 18.sp,
@@ -123,10 +131,11 @@ fun LogIn(navController: NavController){
 
 
             }
+            Spacer(modifier = Modifier.height(12.dp))
             Text(text = "Forgot your password?",
                 fontSize = 16.sp,
                 fontFamily = Inter,
-                fontWeight = FontWeight.Normal,
+                fontWeight = FontWeight.SemiBold,
                 color = Primary_Green
 
             )
