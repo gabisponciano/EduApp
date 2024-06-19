@@ -59,6 +59,8 @@ fun Course(navController: NavController){
 
         Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
 
+        Spacer(modifier = Modifier.height(16.dp))
+
         Box(modifier = Modifier
             .height(227.98.dp)
             .width(343.dp)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -53,6 +56,7 @@ fun SignUp(navController: NavController){
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    var check by remember { mutableStateOf(false) }
     
     Box(modifier = Modifier
         .fillMaxSize()
@@ -72,15 +76,17 @@ fun SignUp(navController: NavController){
                 onValueChange = {name = it},
                 label = { Text(text = ("Name"), color = TextFieldText) },
                 singleLine = true,
+
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = BackField,
                     unfocusedContainerColor = BackField,
+                    focusedBorderColor = TextFieldBackground,
+                    unfocusedBorderColor= TextFieldBackground
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 modifier = Modifier.width(346.dp)
-
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(value = email,
                 onValueChange = {email = it},
@@ -89,13 +95,16 @@ fun SignUp(navController: NavController){
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = BackField,
                     unfocusedContainerColor = BackField,
+                    focusedBorderColor = TextFieldBackground,
+                    unfocusedBorderColor= TextFieldBackground
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier.width(346.dp)
 
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
             OutlinedTextField(value = password,
                 onValueChange = {password = it},
                 singleLine = true,
@@ -103,6 +112,8 @@ fun SignUp(navController: NavController){
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = BackField,
                     unfocusedContainerColor = BackField,
+                    focusedBorderColor = TextFieldBackground,
+                    unfocusedBorderColor= TextFieldBackground
                 ),
                 visualTransformation =
                 if(showPassword){
@@ -131,7 +142,24 @@ fun SignUp(navController: NavController){
                 modifier = Modifier.width(346.dp)
 
             )
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Row (verticalAlignment = Alignment.CenterVertically){
+                Checkbox(checked = check,
+                    onCheckedChange = {check = it},
+                    colors = CheckboxDefaults.colors(checkmarkColor = Primary_Green)
+                )
+                Text(
+                    text = "I would like to receive your newsletter and other promotional information",
+                    fontSize = 14.sp,
+                    color = Color.LightGray,
+                    fontFamily = Inter,
+
+                )
+
+            }
+            Spacer(modifier = Modifier.height(43.dp))
+
             Button(onClick = {
                 if(email.isEmpty() || password.isEmpty() || name.isEmpty() ){
                     Toast.makeText(context, "It Has Empty Fields", Toast.LENGTH_LONG).show()
@@ -153,7 +181,7 @@ fun SignUp(navController: NavController){
 
 
             }
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Forgot your password?",
                 fontSize = 16.sp,
                 fontFamily = Inter,

@@ -82,7 +82,7 @@ fun ConteudoAula(title: String, description: String){
             .clip(RoundedCornerShape(8.dp))
             .background(BackField)
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Box(
             modifier = Modifier
                 .height(70.dp)
@@ -91,7 +91,7 @@ fun ConteudoAula(title: String, description: String){
         ) {
             Column {
                 Text(title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, fontFamily = Inter)
-                Spacer(modifier = Modifier.height(6.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     description,
                     fontSize = 14.sp,

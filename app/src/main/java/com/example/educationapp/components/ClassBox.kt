@@ -70,6 +70,7 @@ fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
              modifier = Modifier
                  .height(65.dp)
                  .width(343.dp)
+                 .padding(10.dp)
              ){
              Text(
                  text = "Get Your Certificate",
@@ -105,7 +106,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                     )
                 }
             }
-
+            Spacer(modifier = Modifier.height(16.dp))
             Box(modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
                 .fillMaxWidth()
@@ -123,7 +124,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                     Text(text = box.description,
                         fontFamily = Inter,
                         fontWeight = FontWeight.Normal,
-                        fontSize = 16.sp,
+                        fontSize = 14.sp,
                         color = Color.Black
                     )
                 }

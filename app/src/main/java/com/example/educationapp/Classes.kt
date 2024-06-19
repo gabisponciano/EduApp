@@ -42,12 +42,13 @@ fun Classes(navController: NavController){
 
     ){
         HeaderCourse(text = "Aulas", navController, title = "Back")
+
         SearchBarUi(query = query,
             onQueryChange = {query = it}
             )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         ConteudoAula(title = "Python", description = "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr " )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Slider(customBoxes) {
 
         }

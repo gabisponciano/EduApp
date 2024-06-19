@@ -55,7 +55,6 @@ fun LogIn(navController: NavController){
         .background(Color.White),
     ){
 
-
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -69,13 +68,16 @@ fun LogIn(navController: NavController){
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = BackField,
                     unfocusedContainerColor = BackField,
+                    focusedBorderColor = TextFieldBackground,
+                    unfocusedBorderColor= TextFieldBackground
                 ),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier.width(346.dp)
 
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
             OutlinedTextField(value = password,
                 onValueChange = {password = it},
                 singleLine = true,
@@ -83,6 +85,8 @@ fun LogIn(navController: NavController){
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = BackField,
                     unfocusedContainerColor = BackField,
+                    focusedBorderColor = TextFieldBackground,
+                    unfocusedBorderColor= TextFieldBackground
                 ),
                 visualTransformation =
                     if(showPassword){
@@ -109,7 +113,7 @@ fun LogIn(navController: NavController){
                 },
                 modifier = Modifier.width(346.dp)
                 )
-            Spacer(modifier = Modifier.height(150.dp))
+            Spacer(modifier = Modifier.height(43.dp))
             Button(onClick = {
                              if(email.isEmpty() || password.isEmpty() ){
                                  Toast.makeText(context, "It Has Empty Fields",Toast.LENGTH_LONG).show()
@@ -131,7 +135,8 @@ fun LogIn(navController: NavController){
 
 
             }
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
             Text(text = "Forgot your password?",
                 fontSize = 16.sp,
                 fontFamily = Inter,
