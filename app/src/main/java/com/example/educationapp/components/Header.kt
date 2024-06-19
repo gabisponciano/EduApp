@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,17 +34,23 @@ import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldText
 
 @Composable
-fun HeaderLog(text:String ){
+fun HeaderLog(text:String,navController: NavController ){
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(20.dp),
-        contentAlignment = Alignment.Center
+
 
     )
     {
-        Column (horizontalAlignment = Alignment.CenterHorizontally){
+        Column (){
             Row(verticalAlignment = Alignment.CenterVertically){
-                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
+                Icon(imageVector = Icons.Default.Close,
+                    contentDescription = "",
+                    tint = TextFieldText,
+                    modifier = Modifier.clickable { navController.popBackStack() }
+                )
+                Spacer(modifier = Modifier.width(110.dp))
+                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
 
             }
 
@@ -65,15 +72,16 @@ fun HeaderSign(text: String, navController: NavController){
 
                 Icon(imageVector = Icons.Default.Close,
                     contentDescription = "",
-                    tint = TextFieldText
+                    tint = TextFieldText,
+                    modifier = Modifier.clickable { navController.popBackStack() }
                 )
                 Spacer(modifier = Modifier.width(94.69.dp))
-                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
+                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.Medium)
                 Spacer(modifier = Modifier.width(67.dp))
                 Text(text = "Login",
                     fontSize = 16.sp,
                     fontFamily = Inter,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Medium,
                     color = Primary_Green,
                     modifier = Modifier.clickable {
                         navController.navigate("login")
@@ -101,18 +109,18 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
                 Text(text = title,
                     fontSize = 16.sp,
                     fontFamily = Inter,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Medium,
                     color = Primary_Green,
                     modifier = Modifier.clickable {
                         navController.popBackStack()
                     })
-                Spacer(modifier = Modifier.width(83.dp))
+                Spacer(modifier = Modifier.width(80.dp))
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
-                Spacer(modifier = Modifier.width(79.dp))
+                Spacer(modifier = Modifier.width(76.dp))
                 Text(text = "Filter",
                     fontSize = 16.sp,
                     fontFamily = Inter,
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Medium,
                     color = Primary_Green,
                     modifier = Modifier.clickable {
                         navController.navigate("")

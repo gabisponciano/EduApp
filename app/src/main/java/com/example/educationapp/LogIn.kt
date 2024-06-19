@@ -60,7 +60,7 @@ fun LogIn(navController: NavController){
             verticalArrangement = Arrangement.Center
 
         ){
-            HeaderLog(text = "Log In")
+            HeaderLog(text = "Log In",navController)
             OutlinedTextField(value = email, 
                 onValueChange = {email = it},
                 label = { Text(text = ("Email"), color = TextFieldText) },

@@ -63,7 +63,7 @@ fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
             }
         }
     }
-    Spacer(modifier = Modifier.height(16.dp))
+
      if (allChecked){
          Button(onClick = onAllChecked,
              colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
@@ -97,6 +97,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                     contentAlignment = Alignment.CenterEnd
                 ){
                     Checkbox(
+                        //Mudar aqui a implementção de quando estiver marcada vai sempre estar
                         checked = isChecked,
                         onCheckedChange = {
                             isChecked = it
