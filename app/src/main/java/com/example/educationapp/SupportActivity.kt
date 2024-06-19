@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,7 +18,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -27,12 +33,20 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,6 +56,7 @@ import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
 import com.example.educationapp.ui.theme.TextFieldText
+import com.example.educationapp.viewmodels.SupportViewModel
 
 class SupportActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +64,19 @@ class SupportActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EducationAppTheme {
-                SupportActivityLayout()
+                val viewModel: SupportViewModel by viewModels()
+                SupportActivityLayout(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun SupportActivityLayout() {
+fun SupportActivityLayout(
+    viewModel: SupportViewModel
+) {
+    var messageInput by remember { mutableStateOf("") }
+    val messageList by viewModel.messageList.collectAsState()
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -93,7 +113,15 @@ fun SupportActivityLayout() {
             }
         },
         bottomBar = {
-            BottomInputBar()
+            BottomInputBar(
+                messageInput = messageInput,
+                onMessageInputChange = { newInput -> messageInput = newInput },
+                viewModel = viewModel,
+                onDone = {
+                    viewModel.addMessage(messageInput)
+                    messageInput = ""
+                }
+            )
         }
     ) { innerPadding ->
         Box(
@@ -103,16 +131,72 @@ fun SupportActivityLayout() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 14.dp)
+                    .verticalScroll(rememberScrollState())
             ) {
                 Spacer(modifier = Modifier.height(12.dp))
-                Spacer(modifier = Modifier.height(1.dp).fillMaxWidth().background(DarkerGray))
+                Spacer(modifier = Modifier
+                    .height(1.dp)
+                    .fillMaxWidth()
+                    .background(DarkerGray))
+                Box(
+                    modifier = Modifier
+                        .width(235.dp)
+                        .clip(
+                            RoundedCornerShape(
+                                topStart = 10.dp,
+                                topEnd = 10.dp,
+                                bottomStart = 10.dp
+                            )
+                        )
+                        .background(TextFieldBackground)
+                        .padding(vertical = 20.dp, horizontal = 16.dp)
+                        .align(Alignment.Start)
+                ) {
+                    Text(
+                        text = "Lorem ipsum dolor sit amet, consectuter adipiscing elit. Donec fringilla quam eu faci lisis mollis.",
+                        fontSize = 14.sp,
+                        color = Color.Black,
+                        fontFamily = Inter,
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+                messageList.forEach { message ->
+                    Box(
+                        modifier = Modifier
+                            .width(235.dp)
+                            .clip(
+                                RoundedCornerShape(
+                                    topStart = 10.dp,
+                                    topEnd = 10.dp,
+                                    bottomStart = 10.dp
+                                )
+                            )
+                            .background(Primary_Green)
+                            .padding(vertical = 20.dp, horizontal = 16.dp)
+                            .align(Alignment.End)
+                    ) {
+                        Text(
+                            text = message,
+                            fontSize = 14.sp,
+                            color = Color.White,
+                            fontFamily = Inter,
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(24.dp))
+                }
             }
         }
     }
 }
 
 @Composable
-fun BottomInputBar() {
+fun BottomInputBar(
+    messageInput: String,
+    onMessageInputChange: (String) -> Unit,
+    viewModel: SupportViewModel,
+    onDone: () -> Unit,
+) {
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -120,8 +204,8 @@ fun BottomInputBar() {
             .padding(16.dp)
     ) {
         OutlinedTextField(
-            value = "",
-            onValueChange = {/*TODO*/},
+            value = messageInput,
+            onValueChange = { onMessageInputChange(it) },
             trailingIcon = {
                 Box(
                     contentAlignment = Alignment.Center,
@@ -153,7 +237,11 @@ fun BottomInputBar() {
                     color = TextFieldText,
                     fontWeight = FontWeight.Medium
                 )
-            }
+            },
+            keyboardActions = KeyboardActions(onDone = { onDone() }),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            )
         )
     }
 }
@@ -162,6 +250,6 @@ fun BottomInputBar() {
 @Composable
 fun SupportActivityPreview() {
     EducationAppTheme {
-        SupportActivityLayout()
+        SupportActivityLayout(viewModel = SupportViewModel())
     }
 }
