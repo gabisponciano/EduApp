@@ -87,7 +87,7 @@ fun SupportActivityLayout(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
+                    .padding(16.dp, top = 24.dp)
             ) {
                 Text(
                     text = "Back",
@@ -134,10 +134,6 @@ fun SupportActivityLayout(
                     .verticalScroll(rememberScrollState())
             ) {
                 Spacer(modifier = Modifier.height(12.dp))
-                Spacer(modifier = Modifier
-                    .height(1.dp)
-                    .fillMaxWidth()
-                    .background(DarkerGray))
                 Box(
                     modifier = Modifier
                         .width(235.dp)

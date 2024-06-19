@@ -27,18 +27,18 @@ fun ProfilePhoto() {
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .offset(y = offset.dp)
-            .clip(RoundedCornerShape(200.dp))
             .width(158.dp)
             .height(158.dp)
+            .clip(RoundedCornerShape(percent = 100))
             .background(Color.White)
     ) {
         Image(
             painter = painterResource(id = R.drawable.profile_photo),
             contentDescription = "Your profile photo",
             modifier = Modifier
-                .clip(RoundedCornerShape(200.dp))
                 .height(150.dp)
                 .width(150.dp)
+                .clip(RoundedCornerShape(percent = 100))
         )
     }
 }
