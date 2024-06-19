@@ -19,12 +19,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.educationapp.components.CustomBox
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
+import com.example.educationapp.components.Slider
 
 @Composable
 fun Classes(navController: NavController){
-
+    val customBoxes = remember {
+        mutableListOf(
+            CustomBox("Kotlin", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr"),
+            CustomBox("Python", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr"),
+            CustomBox("Go", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr")
+        )}
     var query by remember { mutableStateOf("") }
 
     Column (modifier = Modifier
@@ -40,7 +47,10 @@ fun Classes(navController: NavController){
             )
         Spacer(modifier = Modifier.height(12.dp))
         ConteudoAula(title = "Python", description = "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr " )
+        Spacer(modifier = Modifier.height(12.dp))
+        Slider(customBoxes) {
 
+        }
 
 
     }
