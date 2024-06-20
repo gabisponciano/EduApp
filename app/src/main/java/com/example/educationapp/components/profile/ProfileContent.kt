@@ -21,13 +21,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.TextFieldBackground
+import com.example.educationapp.viewmodels.ProfileViewModel
 
 @Composable
 fun ProfileContent(
+    viewModel: ProfileViewModel,
     selectedOption: MutableState<String>
 ) {
     val contentList: List<String> = listOf("Header", "Body", "Footer", "Nav", "Section vs Article", "Tables")
-    if (selectedOption.value == "Photos") {
+    if (viewModel.option.value == "Photos") {
         Column(
             modifier = Modifier.verticalScroll(rememberScrollState())
         ) {

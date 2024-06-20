@@ -29,6 +29,7 @@ import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
 import com.example.educationapp.ui.theme.TextFieldText
+import com.example.educationapp.viewmodels.ProfileViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -39,17 +40,17 @@ enum class MultiSelectorOption {
 
 @Composable
 fun CustomToggle(
+    viewModel: ProfileViewModel,
     options: List<String>,
-    selectedOption: String,
     onOptionSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
     state: CustomToggleState = rememberMultiSelectorState(
         options = options,
-        selectedOption = selectedOption,
+        selectedOption = viewModel.option.value,
     ),
 ) {
-    LaunchedEffect(key1 = options, key2 = selectedOption) {
-        state.selectOption(this, options.indexOf(selectedOption))
+    LaunchedEffect(key1 = options, key2 = viewModel.option.value) {
+        state.selectOption(this, options.indexOf(viewModel.option.value))
     }
     Layout(
         modifier = modifier

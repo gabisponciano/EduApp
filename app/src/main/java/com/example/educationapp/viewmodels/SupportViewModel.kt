@@ -13,11 +13,23 @@ class SupportViewModel : ViewModel() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     )
     private val _messageStateFlow = MutableStateFlow(_messageList)
+    private val badWords: Set<String> = setOf("caralho", "porra", "krl", "bct", "buceta", "fdp", "puta")
+
     val messageList: StateFlow<List<String>> = _messageStateFlow.asStateFlow()
 
     fun addMessage(message: String) {
-        _messageList.add(message)
-        _messageStateFlow.value = _messageList
+        val filteredMessage = message.split(" ")
+            .map { word ->
+                if (badWords.contains(word.lowercase())) {
+                    "*".repeat(word.length)
+                } else {
+                    word
+                }
+            }.joinToString(" ")
+        if (filteredMessage.isNotEmpty()) {
+            _messageList.add(filteredMessage)
+            _messageStateFlow.value = _messageList
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,6 +43,7 @@ import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
+import com.example.educationapp.viewmodels.ProfileViewModel
 
 class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,14 +51,15 @@ class ProfileActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EducationAppTheme {
-                ProfileActivityLayout()
+                val viewModel: ProfileViewModel by viewModels()
+                ProfileActivityLayout(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun ProfileActivityLayout() {
+fun ProfileActivityLayout(viewModel: ProfileViewModel) {
     val selectedOption = remember { mutableStateOf("Posts") }
     Scaffold(
         modifier = Modifier
@@ -137,14 +140,14 @@ fun ProfileActivityLayout() {
                 modifier = Modifier.padding(horizontal = 24.dp)
             ) {
                 CustomToggle(
+                    viewModel = viewModel,
                     options = listOf("Posts", "Photos"),
-                    selectedOption = selectedOption.value,
                     onOptionSelect = { newOption ->
-                        selectedOption.value = newOption
+                        viewModel.setOption(newOption)
                     })
                 Spacer(modifier = Modifier.height(8.dp))
-                CursosContainer(selectedOption = selectedOption)
-                ProfileContent(selectedOption = selectedOption)
+                CursosContainer(viewModel = viewModel, selectedOption = selectedOption)
+                ProfileContent(viewModel = viewModel, selectedOption = selectedOption)
             }
         }
     }
@@ -203,9 +206,10 @@ fun BottomBar() {
 
 @Composable
 fun CursosContainer(
+    viewModel: ProfileViewModel,
     selectedOption: MutableState<String>
 ) {
-    if (selectedOption.value == "Posts") {
+    if (viewModel.option.value == "Posts") {
         Column(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -222,6 +226,6 @@ fun CursosContainer(
 @Composable
 fun ProfileActivityPreview() {
     EducationAppTheme {
-        ProfileActivityLayout()
+        ProfileActivityLayout(viewModel = ProfileViewModel())
     }
 }

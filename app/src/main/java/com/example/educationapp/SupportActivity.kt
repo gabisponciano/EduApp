@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -87,7 +88,7 @@ fun SupportActivityLayout(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp, top = 24.dp)
+                    .padding(horizontal = 16.dp, vertical = 24.dp)
             ) {
                 Text(
                     text = "Back",
@@ -116,7 +117,6 @@ fun SupportActivityLayout(
             BottomInputBar(
                 messageInput = messageInput,
                 onMessageInputChange = { newInput -> messageInput = newInput },
-                viewModel = viewModel,
                 onDone = {
                     viewModel.addMessage(messageInput)
                     messageInput = ""
@@ -189,7 +189,6 @@ fun SupportActivityLayout(
 fun BottomInputBar(
     messageInput: String,
     onMessageInputChange: (String) -> Unit,
-    viewModel: SupportViewModel,
     onDone: () -> Unit,
 ) {
 
@@ -214,7 +213,8 @@ fun BottomInputBar(
                     Icon(
                         painterResource(id = R.drawable.baseline_arrow_upward_24),
                         contentDescription = null,
-                        tint = Color.White
+                        tint = Color.White,
+                        modifier = Modifier.clickable { onDone() }
                     )
                 }
             },
