@@ -93,36 +93,74 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                 Box(modifier = Modifier
                     .background(Color.Transparent)
                     .fillMaxWidth()
-                    .height(25.dp),
-                    contentAlignment = Alignment.CenterEnd
+                    .height(40.dp),
+                    //contentAlignment = Alignment.CenterEnd
                 ){
-                    Checkbox(
-                        //Mudar aqui a implementção de quando estiver marcada vai sempre estar
-                        checked = isChecked,
-                        onCheckedChange = {//Quando eu clico não é automatico
-                            if(box.isChecked){
-                                box.isChecked = true
-                            }
-                            else {
-                                box.isChecked = it
+                    Row(verticalAlignment = Alignment.CenterVertically){
+                        Checkbox(
+                            //Mudar aqui a implementção de quando estiver marcada vai sempre estar
+                            checked = isChecked,
+                            onCheckedChange = {//Quando eu clico não é automatico
+                                if(box.isChecked){
+                                    box.isChecked = true
+                                }
+                                else {
+                                    isChecked = it
+                                    box.isChecked = it
 
+                                }
+                                //isChecked = it
+                                //box.isChecked= it
+                                onCheckedChange()
                             }
-                            //isChecked = it
-                            //box.isChecked= it
-                            onCheckedChange()
-                        }
-                    )
+                        )
+//                        Text(text = box.title,
+//                            fontFamily = Inter,
+//                            fontWeight = FontWeight.SemiBold,
+//                            fontSize = 16.sp,
+//                            color = Color.White)
+//                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(text = box.description,
+                            fontFamily = Inter,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 16.sp,
+                            color = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(150.dp))
+
+                    }
+//                    Row(){
+//                        Checkbox(
+//                        //Mudar aqui a implementção de quando estiver marcada vai sempre estar
+//                        checked = isChecked,
+//                        onCheckedChange = {//Quando eu clico não é automatico
+//                            if(box.isChecked){
+//                                box.isChecked = true
+//                            }
+//                            else {
+//                                isChecked = it
+//                                box.isChecked = it
+//
+//                            }
+//                            //isChecked = it
+//                            //box.isChecked= it
+//                            onCheckedChange()
+//                        }
+//                    )}
+
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
             Box(modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
-                .fillMaxWidth()
+                .width(343.dp)
                 .height(275.dp)
-                .background(BackField),
+                .background(Primary_Green),
                 contentAlignment = Alignment.Center
             ){
+
                 Column (verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+                    
                     Text(text = box.title,
                         fontFamily = Inter,
                         fontWeight = FontWeight.SemiBold,
@@ -136,6 +174,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                         color = Color.Black
                     )
                 }
+
 
             }
         }

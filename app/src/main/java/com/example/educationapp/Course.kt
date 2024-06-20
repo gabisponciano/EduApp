@@ -1,5 +1,6 @@
 package com.example.educationapp
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -20,10 +21,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.educationapp.components.BottomBar
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
 import com.example.educationapp.ui.theme.BackField
@@ -45,19 +48,20 @@ fun Course(navController: NavController){
             )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.",navController = rememberNavController() )
+
+        Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.javalogo ,navController = rememberNavController() )
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
+        Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.kotlinlogo,navController = rememberNavController())
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
+        Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.pythonlogo,navController = rememberNavController())
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", navController = rememberNavController())
+        Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.gologo,navController = rememberNavController())
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -67,8 +71,10 @@ fun Course(navController: NavController){
             .clip(RoundedCornerShape(10.dp))
             .background(BackField)
             .clickable { navController.navigate("classes") }
-        )
-
+        ){
+            Image(painterResource(R.drawable.onlineclass), contentDescription ="" )
+        }
+        BottomBar()
     }
 }
 

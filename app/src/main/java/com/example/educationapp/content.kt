@@ -1,5 +1,7 @@
 package com.example.educationapp
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -35,6 +38,7 @@ fun Content(
     cornerRadius: Dp = 10.dp,
     spacing: Dp = 28.dp,
     rowWidth: Dp = 320.dp,
+    @DrawableRes image: Int,
     navController: NavController
 ){
     Column (){
@@ -50,7 +54,7 @@ fun Content(
                     .background(BackField),
                 contentAlignment = Alignment.TopCenter
             ) {
-                // You can add content inside this Box if needed
+                Image(painter = painterResource(image), contentDescription ="" )
             }
             Box(
                 modifier = Modifier
@@ -77,11 +81,14 @@ fun Content(
 fun ConteudoAula(title: String, description: String){
     Column (){
         Box(modifier = Modifier
-            .height(240.dp)
+            .height(230.dp)
             .width(343.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(BackField)
         )
+        {
+            Image(painterResource(R.drawable.pythonclass), contentDescription ="" )
+        }
         Spacer(modifier = Modifier.height(8.dp))
         Box(
             modifier = Modifier
@@ -103,8 +110,7 @@ fun ConteudoAula(title: String, description: String){
     }
 }
 
-@Composable
-fun Caurosel(){}
+
 
 @Preview
 @Composable

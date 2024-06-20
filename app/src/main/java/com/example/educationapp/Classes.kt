@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.educationapp.components.BottomBar
 import com.example.educationapp.components.CustomBox
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
@@ -28,9 +29,9 @@ import com.example.educationapp.components.Slider
 fun Classes(navController: NavController){
     val customBoxes = remember {
         mutableListOf(
-            CustomBox("Kotlin", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr"),
-            CustomBox("Python", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr"),
-            CustomBox("Go", "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr")
+            CustomBox("Python Aula 01", "Introdução ao Desenvolvimento"),
+            CustomBox("Python Aula 02", "Objetos e Classes"),
+            CustomBox("Python Aula 03", "Primeiro App")
         )}
     var query by remember { mutableStateOf("") }
 
@@ -47,11 +48,11 @@ fun Classes(navController: NavController){
             onQueryChange = {query = it}
             )
         Spacer(modifier = Modifier.height(16.dp))
-        ConteudoAula(title = "Python", description = "dcjsiufke cskrbg sbkve rg cbkbrg vsbhrmfg em vjdebmtg  cdbmr " )
+        ConteudoAula(title = "Python", description = "dvfnjkdfnv skjfnkenfr vdkjfnk" )
         Spacer(modifier = Modifier.height(16.dp))
         Slider(customBoxes) {
-
         }
+        BottomBar()
 
 
     }
