@@ -101,7 +101,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                         checked = isChecked,
                         onCheckedChange = {
                             isChecked = it
-                            box.isChecked=it
+                            box.isChecked= it
                             onCheckedChange()
                         }
                     )
