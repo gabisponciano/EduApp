@@ -1,5 +1,6 @@
 package com.example.educationapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
@@ -50,6 +52,7 @@ class Course : ComponentActivity() {
         }
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Course(navController: NavController){
 
@@ -95,8 +98,8 @@ fun Course(navController: NavController){
         ){
             Image(painterResource(R.drawable.onlineclass), contentDescription ="" )
         }
-        BottomBar()
     }
+
 }
 
 @Preview
