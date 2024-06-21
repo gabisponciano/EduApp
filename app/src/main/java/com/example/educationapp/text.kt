@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.Inter
 
 data class BottomNavigationItem(
@@ -26,63 +28,67 @@ data class BottomNavigationItem(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 )
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavApp(){
+fun NavApp(navController: NavController){
+    //val navController = rememberNavController()
     var selectedItemIndex by remember {
         mutableStateOf(0)
     }
     val items = listOf(
         BottomNavigationItem(
-            title = "Course",
+            title = "course",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         ),
         BottomNavigationItem(
-            title = "Classes",
+            title = "classes",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         ),
         BottomNavigationItem(
-            title = "Profile",
+            title = "",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         ),
         BottomNavigationItem(
-            title = "Suporte",
+            title = "",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         )
     )
+    NavigationBar {
+        items.forEachIndexed{index, item ->
+            NavigationBarItem(
+            selected = selectedItemIndex == index,
+                    onClick = {
+                        selectedItemIndex = index
+                        if(item.title == "course")
+                        {
 
-    Scaffold (
-        bottomBar = {
-            NavigationBar {
-                items.forEachIndexed{index, item ->
-                    NavigationBarItem(
-                        selected = selectedItemIndex == index,
-                        onClick = {
-                            selectedItemIndex = index
-                            //navController.navigate(item.title)
+                            navController.navigate("course")
+                        }
+                        else if( item.title == "classes"){
+                            navController.navigate("classes")
+                        }
 
-                        },
-                        label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
-                        icon = {
-                                Icon(
-                                    imageVector = (if (index == selectedItemIndex ){
-                                    item.selectedIcon
-                                }else item.unselectedIcon),
-                                    contentDescription = item.title )
 
-                        })
+                    },
+                    label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
+                    icon = {
+                            Icon(
+                                imageVector = (if (index == selectedItemIndex ){
+                                item.selectedIcon
+                            }else item.unselectedIcon),
+                                contentDescription = item.title )
+
+                    })
 
                 }
             }
-        }
-    ){
-        //
-    }
+
 }
 
 
@@ -92,5 +98,6 @@ fun NavApp(){
 @Preview
 @Composable
 fun ButtonTestPreview(){
-    NavApp()
+    val navController = rememberNavController()
+    NavApp(navController)
 }

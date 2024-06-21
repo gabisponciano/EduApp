@@ -98,6 +98,7 @@ fun Course(navController: NavController){
         ){
             Image(painterResource(R.drawable.onlineclass), contentDescription ="" )
         }
+         NavApp(navController)
     }
 
 }

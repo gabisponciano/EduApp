@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
                     composable("classes"){
                         Classes(navController)
                     }
+
                     }
                 }
 

@@ -57,7 +57,7 @@ fun Classes(navController: NavController){
         Spacer(modifier = Modifier.height(16.dp))
         Slider(customBoxes) {
         }
-        BottomBar()
+        NavApp(navController)
 
 
     }
