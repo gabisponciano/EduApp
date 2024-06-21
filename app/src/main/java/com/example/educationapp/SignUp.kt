@@ -1,6 +1,10 @@
 package com.example.educationapp
 
+import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,24 +43,44 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.HeaderLog
 import com.example.educationapp.components.HeaderSign
 import com.example.educationapp.ui.theme.BackField
+import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
 import com.example.educationapp.ui.theme.TextFieldText
+import com.example.educationapp.viewmodels.SignUpViewModel
+import com.example.educationapp.viewmodels.UserViewModel
+
+class SignUp : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            EducationAppTheme {
+                val navController = rememberNavController()
+                SignUp(navController = navController)
+            }
+        }
+    }
+}
 
 @Composable
 fun SignUp(navController: NavController){
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
+//    var name by remember { mutableStateOf("") }
+//    var email by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+//    var showPassword by remember { mutableStateOf(false) }
+//    var check by remember { mutableStateOf(false) }
+
+    val signUpViewModel = viewModel<SignUpViewModel>()
     val context = LocalContext.current
-    var check by remember { mutableStateOf(false) }
+
     
     Box(modifier = Modifier
         .fillMaxSize()
@@ -72,8 +96,8 @@ fun SignUp(navController: NavController){
         ){
             HeaderSign(text = "Sign Up", navController)
             
-            OutlinedTextField(value = name,
-                onValueChange = {name = it},
+            OutlinedTextField(value = signUpViewModel.name.value,
+                onValueChange = {signUpViewModel.nameUser(it)},
                 label = { Text(text = ("Name"), color = TextFieldText) },
                 singleLine = true,
 
@@ -88,8 +112,8 @@ fun SignUp(navController: NavController){
             )
             Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(value = email,
-                onValueChange = {email = it},
+            OutlinedTextField(value = signUpViewModel.email.value,
+                onValueChange = {signUpViewModel.emailUser(it)},
                 label = { Text(text = ("Email"), color = TextFieldText) },
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
@@ -105,8 +129,8 @@ fun SignUp(navController: NavController){
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(value = password,
-                onValueChange = {password = it},
+            OutlinedTextField(value = signUpViewModel.password.value,
+                onValueChange = {signUpViewModel.passwordUser(it)},
                 singleLine = true,
                 label = { Text(text = "Password", color = TextFieldText) },
                 colors = OutlinedTextFieldDefaults.colors(
@@ -116,7 +140,7 @@ fun SignUp(navController: NavController){
                     unfocusedBorderColor= TextFieldBackground
                 ),
                 visualTransformation =
-                if(showPassword){
+                if(signUpViewModel.showPassword.value){
                     VisualTransformation.None
                 }else{
                     PasswordVisualTransformation()
@@ -124,18 +148,18 @@ fun SignUp(navController: NavController){
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
                 trailingIcon = {
-                    if (showPassword){
+                    if (signUpViewModel.showPassword.value){
                         Icon(
                             painterResource(R.drawable.visibility),
                             contentDescription = "",
-                            modifier = Modifier.clickable { showPassword = false  }
+                            modifier = Modifier.clickable { signUpViewModel.toggleShowPassword()  }
                         )
                     }
                     else{
                         Icon(
                             painterResource(R.drawable.novisibility),
                             contentDescription = "",
-                            modifier = Modifier.clickable { showPassword = true }
+                            modifier = Modifier.clickable { signUpViewModel.toggleShowPassword() }
                         )
                     }
                 },
@@ -145,8 +169,8 @@ fun SignUp(navController: NavController){
             Spacer(modifier = Modifier.height(32.dp))
 
             Row (verticalAlignment = Alignment.CenterVertically){
-                Checkbox(checked = check,
-                    onCheckedChange = {check = it},
+                Checkbox(checked = signUpViewModel.check.value,
+                    onCheckedChange = {signUpViewModel.markCheck(it)},
                     colors = CheckboxDefaults.colors(checkmarkColor = Primary_Green)
                 )
                 Text(
@@ -161,12 +185,11 @@ fun SignUp(navController: NavController){
             Spacer(modifier = Modifier.height(43.dp))
 
             Button(onClick = {
-                if(email.isEmpty() || password.isEmpty() || name.isEmpty() ){
+                if(signUpViewModel.email.value.isEmpty() || signUpViewModel.password.value.isEmpty() || signUpViewModel.name.value.isEmpty() ){
                     Toast.makeText(context, "It Has Empty Fields", Toast.LENGTH_LONG).show()
                 }else{
                     navController.navigate("course")
                 }
-
 
             },
                 colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),

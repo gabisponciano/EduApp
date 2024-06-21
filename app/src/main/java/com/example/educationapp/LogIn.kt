@@ -1,6 +1,11 @@
 package com.example.educationapp
 
+import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -40,17 +45,35 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.HeaderLog
 import com.example.educationapp.ui.theme.BackField
+import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldBackground
 import com.example.educationapp.ui.theme.TextFieldText
-import com.example.educationapp.viewmodels.userviewmodel
+import com.example.educationapp.viewmodels.UserViewModel
+
+class LogIn : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            EducationAppTheme {
+                val navController = rememberNavController()
+                LogIn(navController = navController)
+
+            }
+        }
+    }
+}
 
 @Composable
 fun LogIn(navController: NavController){
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var showPassword by remember { mutableStateOf(false) }
+
+
+//    var email by remember { mutableStateOf("") }
+//    var password by remember { mutableStateOf("") }
+//    var showPassword by remember { mutableStateOf(false) }
+    val userViewModel = viewModel<UserViewModel>()
     val context = LocalContext.current
     Box(modifier = Modifier
         .fillMaxSize()
@@ -64,8 +87,8 @@ fun LogIn(navController: NavController){
         ){
             HeaderLog(text = "Log In",navController)
 
-            OutlinedTextField(value = email, 
-                onValueChange = {email = it},
+            OutlinedTextField(value = userViewModel.email.value,
+                onValueChange = { userViewModel.emailUser(it)},
                 label = { Text(text = ("Email"), color = TextFieldText) },
                 singleLine = true,
                 colors = OutlinedTextFieldDefaults.colors(
@@ -81,8 +104,8 @@ fun LogIn(navController: NavController){
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(value = password,
-                onValueChange = {password = it},
+            OutlinedTextField(value = userViewModel.password.value,
+                onValueChange = {userViewModel.passwordUser(it)},
                 singleLine = true,
                 label = { Text(text = "Password", color = TextFieldText)},
                 colors = OutlinedTextFieldDefaults.colors(
@@ -92,7 +115,7 @@ fun LogIn(navController: NavController){
                     unfocusedBorderColor= TextFieldBackground
                 ),
                 visualTransformation =
-                    if(showPassword){
+                    if(userViewModel.showPassword.value){
                         VisualTransformation.None
                     }else{
                         PasswordVisualTransformation()
@@ -100,17 +123,17 @@ fun LogIn(navController: NavController){
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
                 trailingIcon = {
-                    if (showPassword){
+                    if (userViewModel.showPassword.value){
                         Icon(
                             painterResource(R.drawable.visibility),
                             contentDescription = "",
-                            modifier = Modifier.clickable { showPassword = false  }
+                            modifier = Modifier.clickable { userViewModel.toggleShowPassword()  }
                             )
                     }
                     else{
                         Icon(painterResource(R.drawable.novisibility),
                             contentDescription = "",
-                            modifier = Modifier.clickable { showPassword = true }
+                            modifier = Modifier.clickable { userViewModel.toggleShowPassword() }
                         )
                     }
                 },
@@ -118,7 +141,7 @@ fun LogIn(navController: NavController){
                 )
             Spacer(modifier = Modifier.height(43.dp))
             Button(onClick = {
-                             if(email.isEmpty() || password.isEmpty() ){
+                             if(userViewModel.email.value.isEmpty() || userViewModel.password.value.isEmpty() ){
                                  Toast.makeText(context, "It Has Empty Fields",Toast.LENGTH_LONG).show()
                              }else{
                                  navController.navigate("course")

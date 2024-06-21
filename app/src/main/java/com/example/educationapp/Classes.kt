@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.BottomBar
@@ -24,6 +25,8 @@ import com.example.educationapp.components.CustomBox
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
 import com.example.educationapp.components.Slider
+import com.example.educationapp.viewmodels.ClassViewModel
+import com.example.educationapp.viewmodels.SignUpViewModel
 
 @Composable
 fun Classes(navController: NavController){
@@ -33,7 +36,9 @@ fun Classes(navController: NavController){
             CustomBox("Python Aula 02", "Objetos e Classes"),
             CustomBox("Python Aula 03", "Primeiro App")
         )}
-    var query by remember { mutableStateOf("") }
+    //var query by remember { mutableStateOf("") }
+
+    val classViewModel = viewModel<ClassViewModel>()
 
     Column (modifier = Modifier
         .fillMaxSize()
@@ -44,8 +49,8 @@ fun Classes(navController: NavController){
     ){
         HeaderCourse(text = "Aulas", navController, title = "Back")
 
-        SearchBarUi(query = query,
-            onQueryChange = {query = it}
+        SearchBarUi(query = classViewModel.query.value,
+            onQueryChange = {classViewModel.queryUser(it)}
             )
         Spacer(modifier = Modifier.height(16.dp))
         ConteudoAula(title = "Python", description = "dvfnjkdfnv skjfnkenfr vdkjfnk" )

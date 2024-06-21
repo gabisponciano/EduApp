@@ -68,16 +68,16 @@ fun HeaderSign(text: String, navController: NavController){
     )
     {
         Column (horizontalAlignment = Alignment.CenterHorizontally){
-            Row(verticalAlignment = Alignment.CenterVertically){
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
 
                 Icon(imageVector = Icons.Default.Close,
                     contentDescription = "",
                     tint = TextFieldText,
                     modifier = Modifier.clickable { navController.popBackStack() }
                 )
-                Spacer(modifier = Modifier.width(94.69.dp))
+
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.Medium)
-                Spacer(modifier = Modifier.width(67.dp))
+
                 Text(text = "Login",
                     fontSize = 16.sp,
                     fontFamily = Inter,
@@ -105,7 +105,7 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
     {
 
         Column (horizontalAlignment = Alignment.CenterHorizontally){
-            Row(verticalAlignment = Alignment.CenterVertically){
+            Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.SpaceBetween,modifier = Modifier.fillMaxWidth()){
                 Text(text = title,
                     fontSize = 16.sp,
                     fontFamily = Inter,

@@ -33,10 +33,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldText
+import com.example.educationapp.viewmodels.ClassBoxModelView
+import com.example.educationapp.viewmodels.SignUpViewModel
 
 data class CustomBox(
     val title:String,
@@ -46,10 +49,11 @@ data class CustomBox(
 
 @Composable
 fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
-    var allChecked by remember { mutableStateOf(false) }
+    val boxModelView = viewModel<ClassBoxModelView>()
+//    var allChecked by remember { mutableStateOf(false) }
 //perform asynchronous tasks in a Composable function
     LaunchedEffect(customBoxes) {
-        allChecked = customBoxes.all{ it.isChecked}
+        boxModelView.allCheck.value = customBoxes.all{ it.isChecked}
     }
     LazyRow (
         modifier = Modifier
@@ -59,12 +63,12 @@ fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
     ) {
         items(customBoxes){ box ->
             BoxCheck(box){
-                allChecked = customBoxes.all {it.isChecked}
+                boxModelView.allCheck.value = customBoxes.all {it.isChecked}
             }
         }
     }
 
-     if (allChecked){
+     if (boxModelView.allCheck.value){
          Button(onClick = onAllChecked,
              colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
              modifier = Modifier

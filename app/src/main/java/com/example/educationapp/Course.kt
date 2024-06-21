@@ -1,5 +1,9 @@
 package com.example.educationapp
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,16 +28,33 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.BottomBar
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
 import com.example.educationapp.ui.theme.BackField
+import com.example.educationapp.ui.theme.EducationAppTheme
+import com.example.educationapp.viewmodels.CourseViewModel
+import com.example.educationapp.viewmodels.SignUpViewModel
 
+class Course : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            EducationAppTheme {
+                Course()
+            }
+        }
+    }
+}
 @Composable
 fun Course(navController: NavController){
-    var query by remember { mutableStateOf("") }
+
+    //var query by remember { mutableStateOf("") }
+    val courseUpViewModel = viewModel<CourseViewModel>()
 
     Column (modifier = Modifier
         .fillMaxSize()
@@ -43,8 +64,8 @@ fun Course(navController: NavController){
 
         HeaderCourse(text = "Course" , navController, title = "Log Out")
 
-        SearchBarUi(query = query,
-            onQueryChange = {query = it},
+        SearchBarUi(query = courseUpViewModel.query.value,
+            onQueryChange = {courseUpViewModel.queryUser(it)},
             )
         Spacer(modifier = Modifier.height(16.dp))
 
