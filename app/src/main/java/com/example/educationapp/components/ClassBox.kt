@@ -112,9 +112,11 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
                             //Mudar aqui a implementção de quando estiver marcada vai sempre estar
                             checked = isChecked,
                             onCheckedChange = { checked ->//Quando eu clico não é automatico
-                                isChecked = checked
-                                onCheckedChange(box, checked)
-                            }
+                                if (!isChecked) {
+                                    isChecked = checked
+                                    onCheckedChange(box, checked)
+                                }
+                                }
 
                             //isChecked = it
                             //box.isChecked= i

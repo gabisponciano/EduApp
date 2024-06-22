@@ -22,9 +22,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.Inter
+import com.example.educationapp.viewmodels.CourseViewModel
+import com.example.educationapp.viewmodels.NavButtonModelView
 
 data class BottomNavigationItem(
     val title:String,
@@ -37,9 +41,12 @@ data class BottomNavigationItem(
 @Composable
 fun NavApp(navController: NavController){
     //val navController = rememberNavController()
+    val navViewModel = viewModel<NavButtonModelView>()
     var selectedItemIndex by remember {
         mutableStateOf(0)
     }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
     val items = listOf(
         BottomNavigationItem(
             title = "course",
@@ -62,32 +69,24 @@ fun NavApp(navController: NavController){
             unselectedIcon = Icons.Outlined.CheckCircle
         )
     )
+
+   // val selectedItemIndex = items.indexOfFirst { it.title == currentRoute }
     NavigationBar (modifier = Modifier.height(68.dp)){
         items.forEachIndexed{index, item ->
             NavigationBarItem(
-                selected = selectedItemIndex == index,
+                selected = navViewModel.selectedItemIndex.value == index,
                 onClick = {
-                    selectedItemIndex = index
-                    if(item.title == "course")
-                    {
-                        navController.navigate("course")
+                    navViewModel.selectedItemIndex.value = index
+                    navController.navigate(item.title){
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
                     }
-                    else if(item.title == "classes"){
-                        navController.navigate("classes")
-                    }
-                    else if(item.title == "profile"){
-                        navController.navigate("profile")
-                    }
-                    else if(item.title == "support"){
-                        navController.navigate("support")
-                    }
-
 
                 },
                 label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
                 icon = {
                     Icon(
-                        imageVector = (if (index == selectedItemIndex ){
+                        imageVector = (if (index == navViewModel.selectedItemIndex.value ){
                             item.selectedIcon
                         }else item.unselectedIcon),
                         contentDescription = item.title )
