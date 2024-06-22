@@ -57,9 +57,9 @@ fun Slider(customBoxes: List<CustomBox>, navController: NavController){
 
 //    var allChecked by remember { mutableStateOf(false) }
 //perform asynchronous tasks in a Composable function
-    LaunchedEffect(customBoxes) {
-        boxModelView.markAllCheck(customBoxes)
-    }
+//    LaunchedEffect(customBoxes) {
+//        boxModelView.markAllCheck(customBoxes)
+//    }
     LazyRow (
         modifier = Modifier
             .fillMaxWidth()
@@ -118,15 +118,9 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
                                 }
                                 }
 
-                            //isChecked = it
-                            //box.isChecked= i
+
                         )
-//                        Text(text = box.title,
-//                            fontFamily = Inter,
-//                            fontWeight = FontWeight.SemiBold,
-//                            fontSize = 16.sp,
-//                            color = Color.White)
-//                        Spacer(modifier = Modifier.height(5.dp))
+
                         Text(text = box.description,
                             fontFamily = Inter,
                             fontWeight = FontWeight.Normal,
@@ -136,24 +130,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
                         Spacer(modifier = Modifier.width(150.dp))
 
                     }
-//                    Row(){
-//                        Checkbox(
-//                        //Mudar aqui a implementção de quando estiver marcada vai sempre estar
-//                        checked = isChecked,
-//                        onCheckedChange = {//Quando eu clico não é automatico
-//                            if(box.isChecked){
-//                                box.isChecked = true
-//                            }
-//                            else {
-//                                isChecked = it
-//                                box.isChecked = it
 //
-//                            }
-//                            //isChecked = it
-//                            //box.isChecked= it
-//                            onCheckedChange()
-//                        }
-//                    )}
 
                 }
             }

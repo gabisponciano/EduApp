@@ -67,14 +67,14 @@ class ProfileActivity : ComponentActivity() {
         setContent {
             EducationAppTheme {
                 val viewModel: ProfileViewModel by viewModels()
-                ProfileActivityLayout(viewModel)
+                ProfileActivityLayout(viewModel, rememberNavController())
             }
         }
     }
 }
 
 @Composable
-fun ProfileActivityLayout(viewModel: ProfileViewModel) {
+fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavController) {
     val selectedOption = remember { mutableStateOf("Posts") }
     Box(modifier = Modifier) {
 
@@ -196,7 +196,7 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Button(
-                                onClick = { /*TODO*/},
+                                onClick = { navController.navigate("login")},
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Primary_Green,
                                     contentColor = Color.White
@@ -238,57 +238,6 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
 }
 
 @Composable
-fun BottomBar(modifier: Modifier = Modifier) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .background(Color.White)
-    ) {
-        Spacer(modifier = Modifier
-            .height(1.dp)
-            .fillMaxWidth()
-            .background(TextFieldBackground)
-            .align(Alignment.TopStart))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(38.dp)
-        ) {
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-        }
-    }
-}
-
-@Composable
 fun CursosContainer(
     viewModel: ProfileViewModel,
     selectedOption: MutableState<String>
@@ -310,6 +259,6 @@ fun CursosContainer(
 @Composable
 fun ProfileActivityPreview() {
     EducationAppTheme {
-        ProfileActivityLayout(viewModel = ProfileViewModel())
+        ProfileActivityLayout(viewModel = ProfileViewModel(), navController = rememberNavController())
     }
 }

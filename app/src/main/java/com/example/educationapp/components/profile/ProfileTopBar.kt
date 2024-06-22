@@ -1,7 +1,6 @@
 package com.example.educationapp.components.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -69,10 +68,7 @@ fun ProfileTopBar(viewModel: ProfileViewModel, navController: NavController) {
                         fontSize = 16.sp,
                         color = Color.White,
                         fontFamily = Inter,
-                        fontWeight = FontWeight.Normal,
-                        modifier = Modifier.clickable { navController.navigate("signup") }
-
-
+                        fontWeight = FontWeight.Normal
                     )
                 }
             }

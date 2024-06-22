@@ -12,6 +12,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,7 +41,6 @@ data class BottomNavigationItem(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavApp(navController: NavController){
-    //val navController = rememberNavController()
     val navViewModel = viewModel<NavButtonModelView>()
     var selectedItemIndex by remember {
         mutableStateOf(0)
@@ -70,11 +70,13 @@ fun NavApp(navController: NavController){
         )
     )
 
-   // val selectedItemIndex = items.indexOfFirst { it.title == currentRoute }
+    LaunchedEffect(currentRoute) {
+        navViewModel.selectedItemIndex.value = items.indexOfFirst { it.title == currentRoute }
+    }
     NavigationBar (modifier = Modifier.height(68.dp)){
         items.forEachIndexed{index, item ->
             NavigationBarItem(
-                selected = navViewModel.selectedItemIndex.value == index,
+                selected = navViewModel.selectedItemIndex.value== index,
                 onClick = {
                     navViewModel.selectedItemIndex.value = index
                     navController.navigate(item.title){

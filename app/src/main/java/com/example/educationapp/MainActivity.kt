@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         EducationAppLayout(navController)
                     }
                     composable("profile"){
-                        ProfileActivityLayout(viewModel = ProfileViewModel())
+                        ProfileActivityLayout(viewModel = ProfileViewModel(), navController)
                     }
                     composable("support"){
                         SupportActivityLayout(viewModel = SupportViewModel(), navController)
