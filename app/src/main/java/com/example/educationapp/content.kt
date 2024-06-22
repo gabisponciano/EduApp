@@ -39,7 +39,8 @@ fun Content(
     spacing: Dp = 28.dp,
     rowWidth: Dp = 320.dp,
     @DrawableRes image: Int,
-    navController: NavController
+    navController: NavController,
+    modifier: Modifier
 ){
     Column (){
         Row(
@@ -48,6 +49,7 @@ fun Content(
         ) {
             Box(
                 modifier = Modifier
+                    .clickable { navController.navigate("classes") }
                     .width(boxSizeW)
                     .height(boxSizeH)
                     .clip(RoundedCornerShape(cornerRadius))
@@ -60,7 +62,7 @@ fun Content(
                 modifier = Modifier
                     .height(90.dp)
                     .width(220.dp)
-                    .clickable { navController.navigate("classes") }
+
             ) {
                 Column {
                     Text(title, fontSize = 16.sp, fontWeight = FontWeight.SemiBold, fontFamily = Inter)

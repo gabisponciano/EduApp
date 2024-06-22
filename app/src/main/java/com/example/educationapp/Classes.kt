@@ -33,13 +33,6 @@ import com.example.educationapp.viewmodels.SignUpViewModel
 
 @Composable
 fun Classes(navController: NavController) {
-    val customBoxes = remember {
-        mutableListOf(
-            CustomBox("Python 01", "Introduction"),
-            CustomBox("Python 02", "Classes and Objects"),
-            CustomBox("Python 03", "Your First App")
-        )
-    }
     val classViewModel = viewModel<ClassViewModel>()
 
     Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
@@ -59,7 +52,7 @@ fun Classes(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             ConteudoAula(title = "Python", description = "dvfnjkdfnv skjfnkenfr vdkjfnk")
             Spacer(modifier = Modifier.height(16.dp))
-            Slider(customBoxes, navController)
+            Slider(navController)
         }
 
         Box(

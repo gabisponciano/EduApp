@@ -52,9 +52,9 @@ data class CustomBox(
 )
 
 @Composable
-fun Slider(customBoxes: List<CustomBox>, navController: NavController){
+fun Slider(navController: NavController){
     val boxModelView = viewModel<ClassBoxModelView>()
-
+    val customBoxes = boxModelView.customBoxes
 //    var allChecked by remember { mutableStateOf(false) }
 //perform asynchronous tasks in a Composable function
 //    LaunchedEffect(customBoxes) {
@@ -69,7 +69,6 @@ fun Slider(customBoxes: List<CustomBox>, navController: NavController){
         items(customBoxes){ box ->
             BoxCheck(box){updatedBox, isChecked ->
                 boxModelView.updateBoxCheck(updatedBox, isChecked)
-                boxModelView.markAllCheck(customBoxes)
             }
         }
     }
@@ -165,16 +164,14 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
     }
 }
 
-//@Preview
-//@Composable
-//fun SliderPreview(){
-//    val navController = rememberNavController()
-//    val customBoxes = remember {
-//        mutableListOf(
-//            CustomBox("Box 1", "Description 1"),
-//            CustomBox("Box 2", "Description 2"),
-//            CustomBox("Box 3", "Description 3"))}
-//    Slider(customBoxes, navController) {
-//
-//    }
-//}
+@Preview
+@Composable
+fun SliderPreview(){
+    val navController = rememberNavController()
+    val customBoxes = remember {
+        mutableListOf(
+            CustomBox("Box 1", "Description 1"),
+            CustomBox("Box 2", "Description 2"),
+            CustomBox("Box 3", "Description 3"))}
+    Slider(navController)
+}

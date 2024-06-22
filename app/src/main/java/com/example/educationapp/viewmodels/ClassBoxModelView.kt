@@ -1,6 +1,7 @@
 package com.example.educationapp.viewmodels
 
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,23 +12,23 @@ class ClassBoxModelView: ViewModel() {
     private val _allCheck = mutableStateOf<Boolean>(false)
     val allChecked: MutableState<Boolean> = _allCheck
 
-    private val _check = mutableStateOf<Boolean>(false)
-    val check: MutableState<Boolean> = _check
+    private val _customBoxes = mutableStateListOf(
+        CustomBox("Python 01", "Introduction"),
+        CustomBox("Python 02", "OOP"),
+        CustomBox("Python 03", "First Project")
+    )
+    val customBoxes: List<CustomBox> get()= _customBoxes
+
 
     //Faz a verificação se todas estão marcadas
-    fun markAllCheck(boxes:List<CustomBox>){
-        _allCheck.value = boxes.all {it.isChecked}
+    fun markAllCheck(){
+        _allCheck.value =_customBoxes.all {it.isChecked}
     }
     fun updateBoxCheck(box: CustomBox, isChecked: Boolean) {
-        box.isChecked = isChecked
+        val index = _customBoxes.indexOf(box)
+        if (index != -1) {
+            _customBoxes[index] = box.copy(isChecked = isChecked)
+            markAllCheck()
+        }
     }
-
-    fun setChecked(value:Boolean){
-        _check.value = value
-    }
-
-    fun markCheck(){
-        _check.value = !_check.value
-    }
-
 }

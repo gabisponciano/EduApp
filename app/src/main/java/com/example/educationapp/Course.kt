@@ -74,19 +74,19 @@ fun Course(navController: NavController){
             Spacer(modifier = Modifier.height(16.dp))
 
 
-            Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.javalogo ,navController = rememberNavController() )
+            Content(title = "Java", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.javalogo ,navController = navController, modifier = Modifier )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.kotlinlogo,navController = rememberNavController())
+            Content(title = "Kotlin", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.kotlinlogo,navController = navController, modifier = Modifier)
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.pythonlogo,navController = rememberNavController())
+            Content(title = "Python", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.pythonlogo,navController = navController,  modifier = Modifier.clickable { navController.navigate("classes") })
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.gologo,navController = rememberNavController())
+            Content(title = "Go", description = "Pellentesque eget urna sit amet lacus rutrum placerat ac vel mi.", image = R.drawable.gologo,navController = navController,modifier = Modifier)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -95,7 +95,7 @@ fun Course(navController: NavController){
                 .width(343.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(BackField)
-                .clickable { navController.navigate("classes") }
+
             ){
                 Image(painterResource(R.drawable.onlineclass), contentDescription ="" )
             }
@@ -105,7 +105,7 @@ fun Course(navController: NavController){
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .background(Color.White) // Adicione um fundo branco para o NavApp se necessário
+                .background(Color.White)
         ) {
             NavApp(navController)
         }
