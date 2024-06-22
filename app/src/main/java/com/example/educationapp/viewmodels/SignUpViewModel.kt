@@ -33,7 +33,11 @@ class SignUpViewModel:ViewModel(){
         _showPassword.value = !_showPassword.value
     }
 
-    fun markCheck(newMark:Boolean){
+    fun setChecked(value:Boolean){
+        _check.value = value
+    }
+
+    fun markCheck(){
         _check.value = !_check.value
     }
 

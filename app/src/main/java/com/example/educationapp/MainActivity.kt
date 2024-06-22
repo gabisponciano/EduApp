@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.EducationAppTheme
+import com.example.educationapp.viewmodels.ProfileViewModel
+import com.example.educationapp.viewmodels.SupportViewModel
 import com.example.educationapp.viewmodels.UserViewModel
 
 class MainActivity : ComponentActivity() {
@@ -34,13 +36,19 @@ class MainActivity : ComponentActivity() {
                     composable("classes"){
                         Classes(navController)
                     }
-
+                    composable("certificate"){
+                        EducationAppLayout(navController)
                     }
+                    composable("profile"){
+                        ProfileActivityLayout(viewModel = ProfileViewModel())
+                    }
+                    composable("support"){
+                        SupportActivityLayout(viewModel = SupportViewModel(), navController)
+                    }
+
                 }
+            }
 
         }
     }
 }
-
-
-

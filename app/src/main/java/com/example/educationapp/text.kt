@@ -1,6 +1,7 @@
 package com.example.educationapp
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.outlined.CheckCircle
@@ -15,9 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -49,45 +52,52 @@ fun NavApp(navController: NavController){
             unselectedIcon = Icons.Outlined.CheckCircle
         ),
         BottomNavigationItem(
-            title = "",
+            title = "profile",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         ),
         BottomNavigationItem(
-            title = "",
+            title = "support",
             selectedIcon = Icons.Filled.CheckCircle,
             unselectedIcon = Icons.Outlined.CheckCircle
         )
     )
-    NavigationBar {
+    NavigationBar (modifier = Modifier.height(68.dp)){
         items.forEachIndexed{index, item ->
             NavigationBarItem(
-            selected = selectedItemIndex == index,
-                    onClick = {
-                        selectedItemIndex = index
-                        if(item.title == "course")
-                        {
+                selected = selectedItemIndex == index,
+                onClick = {
+                    selectedItemIndex = index
+                    if(item.title == "course")
+                    {
+                        navController.navigate("course")
+                    }
+                    else if(item.title == "classes"){
+                        navController.navigate("classes")
+                    }
+                    else if(item.title == "profile"){
+                        navController.navigate("profile")
+                    }
+                    else if(item.title == "support"){
+                        navController.navigate("support")
+                    }
 
-                            navController.navigate("course")
-                        }
-                        else if( item.title == "classes"){
-                            navController.navigate("classes")
-                        }
 
+                },
+                label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
+                icon = {
+                    Icon(
+                        imageVector = (if (index == selectedItemIndex ){
+                            item.selectedIcon
+                        }else item.unselectedIcon),
+                        contentDescription = item.title )
 
-                    },
-                    label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
-                    icon = {
-                            Icon(
-                                imageVector = (if (index == selectedItemIndex ){
-                                item.selectedIcon
-                            }else item.unselectedIcon),
-                                contentDescription = item.title )
+                },
+                modifier = Modifier.height(70.dp)
+            )
 
-                    })
-
-                }
-            }
+        }
+    }
 
 }
 

@@ -46,6 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.CustomToggle
 import com.example.educationapp.components.profile.ProfileContent
 import com.example.educationapp.components.profile.ProfileCurso
@@ -77,7 +79,7 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
     Box(modifier = Modifier) {
 
         Column(modifier = Modifier) {
-            ProfileTopBar(viewModel = viewModel)
+            ProfileTopBar(viewModel = viewModel, navController = rememberNavController())
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
@@ -115,7 +117,7 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
             }
         }
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BottomBar()
+            NavApp(navController = rememberNavController())
         }
         val density = LocalDensity.current
 
@@ -167,7 +169,9 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp).fillMaxHeight()
+                        modifier = Modifier
+                            .padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp)
+                            .fillMaxHeight()
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -197,7 +201,9 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                                     containerColor = Primary_Green,
                                     contentColor = Color.White
                                 ),
-                                modifier = Modifier.fillMaxWidth().height(58.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(58.dp)
                             ) {
                                 Text(
                                     text = "Logout",

@@ -36,6 +36,6 @@ fun TextFieldUi(value:String, onValueChange:(String) -> Unit){
 fun TextFieldPreview()
 {
     TextFieldUi(value = "") {
-        
+
     }
 }

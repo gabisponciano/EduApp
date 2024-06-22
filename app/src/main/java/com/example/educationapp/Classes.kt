@@ -1,10 +1,13 @@
 package com.example.educationapp
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -29,40 +32,45 @@ import com.example.educationapp.viewmodels.ClassViewModel
 import com.example.educationapp.viewmodels.SignUpViewModel
 
 @Composable
-fun Classes(navController: NavController){
+fun Classes(navController: NavController) {
     val customBoxes = remember {
         mutableListOf(
-            CustomBox("Python Aula 01", "Introdução ao Desenvolvimento"),
-            CustomBox("Python Aula 02", "Objetos e Classes"),
-            CustomBox("Python Aula 03", "Primeiro App")
-        )}
-    //var query by remember { mutableStateOf("") }
-
+            CustomBox("Python 01", "Introduction"),
+            CustomBox("Python 02", "Classes and Objects"),
+            CustomBox("Python 03", "Your First App")
+        )
+    }
     val classViewModel = viewModel<ClassViewModel>()
 
-    Column (modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White)
-        .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(modifier = Modifier.fillMaxSize().background(Color.White)) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 70.dp), // Adiciona espaço para o NavApp
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            HeaderCourse(text = "Classes", navController, title = "Back")
 
-    ){
-        HeaderCourse(text = "Aulas", navController, title = "Back")
-
-        SearchBarUi(query = classViewModel.query.value,
-            onQueryChange = {classViewModel.queryUser(it)}
+            SearchBarUi(
+                query = classViewModel.query.value,
+                onQueryChange = { classViewModel.queryUser(it) }
             )
-        Spacer(modifier = Modifier.height(16.dp))
-        ConteudoAula(title = "Python", description = "dvfnjkdfnv skjfnkenfr vdkjfnk" )
-        Spacer(modifier = Modifier.height(16.dp))
-        Slider(customBoxes) {
+            Spacer(modifier = Modifier.height(16.dp))
+            ConteudoAula(title = "Python", description = "dvfnjkdfnv skjfnkenfr vdkjfnk")
+            Spacer(modifier = Modifier.height(16.dp))
+            Slider(customBoxes, navController)
         }
-        NavApp(navController)
 
-
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .background(Color.White) // Adicione um fundo branco para o NavApp se necessário
+        ) {
+            NavApp(navController)
+        }
     }
-
-
 }
 @Preview
 @Composable

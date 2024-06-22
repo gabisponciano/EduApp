@@ -2,11 +2,13 @@ package com.example.educationapp.components
 
 import android.widget.Button
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,6 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
@@ -48,12 +52,13 @@ data class CustomBox(
 )
 
 @Composable
-fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
+fun Slider(customBoxes: List<CustomBox>, navController: NavController){
     val boxModelView = viewModel<ClassBoxModelView>()
+
 //    var allChecked by remember { mutableStateOf(false) }
 //perform asynchronous tasks in a Composable function
     LaunchedEffect(customBoxes) {
-        boxModelView.allCheck.value = customBoxes.all{ it.isChecked}
+        boxModelView.markAllCheck(customBoxes)
     }
     LazyRow (
         modifier = Modifier
@@ -62,30 +67,32 @@ fun Slider(customBoxes: List<CustomBox>,onAllChecked:() -> Unit){
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(customBoxes){ box ->
-            BoxCheck(box){
-                boxModelView.allCheck.value = customBoxes.all {it.isChecked}
+            BoxCheck(box){updatedBox, isChecked ->
+                boxModelView.updateBoxCheck(updatedBox, isChecked)
+                boxModelView.markAllCheck(customBoxes)
             }
         }
     }
 
-     if (boxModelView.allCheck.value){
-         Button(onClick = onAllChecked,
-             colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
-             modifier = Modifier
-                 .height(65.dp)
-                 .width(343.dp)
-                 .padding(10.dp)
-             ){
-             Text(
-                 text = "Get Your Certificate",
-                 fontFamily = Inter,
-                 fontWeight = FontWeight.SemiBold,
-                 color = Color.White)
-         }
-     }
+    if (boxModelView.allChecked.value){
+        Button(onClick = { navController.navigate("certificate") },
+            colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
+            modifier = Modifier
+                .height(65.dp)
+                .width(343.dp)
+                .padding(10.dp)
+
+        ){
+            Text(
+                text = "Get Your Certificate",
+                fontFamily = Inter,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.White)
+        }
+    }
 }
 @Composable
-fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
+fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
     var isChecked by remember { mutableStateOf(box.isChecked) }
 
     Box(modifier = Modifier
@@ -104,19 +111,13 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
                         Checkbox(
                             //Mudar aqui a implementção de quando estiver marcada vai sempre estar
                             checked = isChecked,
-                            onCheckedChange = {//Quando eu clico não é automatico
-                                if(box.isChecked){
-                                    box.isChecked = true
-                                }
-                                else {
-                                    isChecked = it
-                                    box.isChecked = it
-
-                                }
-                                //isChecked = it
-                                //box.isChecked= it
-                                onCheckedChange()
+                            onCheckedChange = { checked ->//Quando eu clico não é automatico
+                                isChecked = checked
+                                onCheckedChange(box, checked)
                             }
+
+                            //isChecked = it
+                            //box.isChecked= i
                         )
 //                        Text(text = box.title,
 //                            fontFamily = Inter,
@@ -164,7 +165,7 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
             ){
 
                 Column (verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
-                    
+
                     Text(text = box.title,
                         fontFamily = Inter,
                         fontWeight = FontWeight.SemiBold,
@@ -185,15 +186,16 @@ fun BoxCheck(box: CustomBox, onCheckedChange:() -> Unit){
     }
 }
 
-@Preview
-@Composable
-fun SliderPreview(){
-    val customBoxes = remember {
-        mutableListOf(
-            CustomBox("Box 1", "Description 1"),
-            CustomBox("Box 2", "Description 2"),
-            CustomBox("Box 3", "Description 3"))}
-    Slider(customBoxes) {
-        
-    }
-}
+//@Preview
+//@Composable
+//fun SliderPreview(){
+//    val navController = rememberNavController()
+//    val customBoxes = remember {
+//        mutableListOf(
+//            CustomBox("Box 1", "Description 1"),
+//            CustomBox("Box 2", "Description 2"),
+//            CustomBox("Box 3", "Description 3"))}
+//    Slider(customBoxes, navController) {
+//
+//    }
+//}

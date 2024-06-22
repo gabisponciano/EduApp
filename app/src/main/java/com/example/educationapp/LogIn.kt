@@ -115,11 +115,11 @@ fun LogIn(navController: NavController){
                     unfocusedBorderColor= TextFieldBackground
                 ),
                 visualTransformation =
-                    if(userViewModel.showPassword.value){
-                        VisualTransformation.None
-                    }else{
-                        PasswordVisualTransformation()
-                    },
+                if(userViewModel.showPassword.value){
+                    VisualTransformation.None
+                }else{
+                    PasswordVisualTransformation()
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
 
                 trailingIcon = {
@@ -128,7 +128,7 @@ fun LogIn(navController: NavController){
                             painterResource(R.drawable.visibility),
                             contentDescription = "",
                             modifier = Modifier.clickable { userViewModel.toggleShowPassword()  }
-                            )
+                        )
                     }
                     else{
                         Icon(painterResource(R.drawable.novisibility),
@@ -138,14 +138,14 @@ fun LogIn(navController: NavController){
                     }
                 },
                 modifier = Modifier.width(346.dp)
-                )
+            )
             Spacer(modifier = Modifier.height(43.dp))
             Button(onClick = {
-                             if(userViewModel.email.value.isEmpty() || userViewModel.password.value.isEmpty() ){
-                                 Toast.makeText(context, "It Has Empty Fields",Toast.LENGTH_LONG).show()
-                             }else{
-                                 navController.navigate("course")
-                             }
+                if(userViewModel.email.value.isEmpty() || userViewModel.password.value.isEmpty() ){
+                    Toast.makeText(context, "It Has Empty Fields",Toast.LENGTH_LONG).show()
+                }else{
+                    navController.navigate("course")
+                }
 
 
             },
@@ -153,9 +153,9 @@ fun LogIn(navController: NavController){
                 modifier = Modifier
                     .height(65.dp)
                     .width(343.dp),
-                ) {
+            ) {
                 Text(text = "Log In",
-                   fontSize = 18.sp,
+                    fontSize = 18.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium)
 
@@ -171,8 +171,8 @@ fun LogIn(navController: NavController){
 
             )
 
-            
-            
+
+
         }
 
     }

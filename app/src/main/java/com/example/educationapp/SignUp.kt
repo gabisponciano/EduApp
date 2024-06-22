@@ -81,21 +81,21 @@ fun SignUp(navController: NavController){
     val signUpViewModel = viewModel<SignUpViewModel>()
     val context = LocalContext.current
 
-    
+
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Color.White),
 
-    ){
+        ){
 
         Column (
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
 
 
-        ){
+            ){
             HeaderSign(text = "Sign Up", navController)
-            
+
             OutlinedTextField(value = signUpViewModel.name.value,
                 onValueChange = {signUpViewModel.nameUser(it)},
                 label = { Text(text = ("Name"), color = TextFieldText) },
@@ -170,7 +170,7 @@ fun SignUp(navController: NavController){
 
             Row (verticalAlignment = Alignment.CenterVertically){
                 Checkbox(checked = signUpViewModel.check.value,
-                    onCheckedChange = {signUpViewModel.markCheck(it)},
+                    onCheckedChange = {signUpViewModel.markCheck()},
                     colors = CheckboxDefaults.colors(checkmarkColor = Primary_Green)
                 )
                 Text(
@@ -179,7 +179,7 @@ fun SignUp(navController: NavController){
                     color = Color.LightGray,
                     fontFamily = Inter,
 
-                )
+                    )
 
             }
             Spacer(modifier = Modifier.height(43.dp))

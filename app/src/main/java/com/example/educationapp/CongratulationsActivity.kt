@@ -1,6 +1,7 @@
 package com.example.educationapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -32,11 +33,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key.Companion.G
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
@@ -48,14 +52,15 @@ class CongratulationsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EducationAppTheme {
-                EducationAppLayout()
+                EducationAppLayout(navController = rememberNavController())
             }
         }
     }
 }
 
 @Composable
-fun EducationAppLayout() {
+fun EducationAppLayout(navController: NavController) {
+    val context = LocalContext.current
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -76,7 +81,7 @@ fun EducationAppLayout() {
                     .padding(20.dp)
             ) {
                 Text(
-                    text = "Parabéns!",
+                    text = "Congratulations!",
                     fontSize = 30.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.SemiBold,
@@ -97,23 +102,24 @@ fun EducationAppLayout() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(54.dp),
-                    onClick = { /*TODO*/ }) {
+                    onClick = { Toast.makeText(context, "Starting Download", Toast.LENGTH_LONG).show() }) {
                     Text(
-                        text = "Certificado",
+                        text = "Certificate",
                         fontSize = 16.sp,
                         fontFamily = Inter,
-                        fontWeight = FontWeight.SemiBold
-                    )
+                        fontWeight = FontWeight.SemiBold,
+
+                        )
                 }
                 Text(
-                    text = "Voltar",
+                    text = "Back",
                     fontSize = 16.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.SemiBold,
                     color = Primary_Green,
                     modifier = Modifier
                         .padding(8.dp)
-                        .clickable { /*TODO*/ }
+                        .clickable { navController.popBackStack()  }
                 )
             }
         }
@@ -124,6 +130,6 @@ fun EducationAppLayout() {
 @Composable
 fun CongratulationsActivityPreview() {
     EducationAppTheme {
-        EducationAppLayout()
+        EducationAppLayout(navController = rememberNavController())
     }
 }

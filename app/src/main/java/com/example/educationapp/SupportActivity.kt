@@ -51,6 +51,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.DarkerGray
 import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
@@ -66,7 +68,7 @@ class SupportActivity : ComponentActivity() {
         setContent {
             EducationAppTheme {
                 val viewModel: SupportViewModel by viewModels()
-                SupportActivityLayout(viewModel)
+                SupportActivityLayout(viewModel, navController = rememberNavController())
             }
         }
     }
@@ -74,7 +76,8 @@ class SupportActivity : ComponentActivity() {
 
 @Composable
 fun SupportActivityLayout(
-    viewModel: SupportViewModel
+    viewModel: SupportViewModel,
+    navController: NavController
 ) {
     var messageInput by remember { mutableStateOf("") }
     val messageList by viewModel.messageList.collectAsState()
@@ -95,7 +98,8 @@ fun SupportActivityLayout(
                     fontSize = 16.sp,
                     color = Primary_Green,
                     fontFamily = Inter,
-                    fontWeight = FontWeight.Medium
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.clickable { navController.popBackStack() }
                 )
                 Text(
                     text = "Profile",
@@ -246,6 +250,6 @@ fun BottomInputBar(
 @Composable
 fun SupportActivityPreview() {
     EducationAppTheme {
-        SupportActivityLayout(viewModel = SupportViewModel())
+        SupportActivityLayout(viewModel = SupportViewModel(), navController = rememberNavController())
     }
 }

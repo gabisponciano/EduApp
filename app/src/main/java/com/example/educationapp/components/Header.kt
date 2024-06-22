@@ -40,7 +40,7 @@ fun HeaderLog(text:String,navController: NavController ){
         .padding(20.dp),
 
 
-    )
+        )
     {
         Column (){
             Row(verticalAlignment = Alignment.CenterVertically){
