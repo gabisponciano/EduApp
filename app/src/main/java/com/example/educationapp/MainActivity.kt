@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EducationAppTheme {
                 val navController = rememberNavController()
-                NavHost(navController = navController, startDestination = "signup"){
+                NavHost(navController = navController, startDestination = "login"){
                     composable("login"){
                         LogIn(navController)
                     }

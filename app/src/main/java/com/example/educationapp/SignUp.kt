@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.educationapp.components.HeaderLog
+
 import com.example.educationapp.components.HeaderSign
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.EducationAppTheme
@@ -90,7 +90,7 @@ fun SignUp(navController: NavController){
 
 
             ){
-            HeaderSign(text = "Sign Up", navController)
+            HeaderSign(text ="Sign Up" , navController)
 
             OutlinedTextField(value = signUpViewModel.name.value,
                 onValueChange = {signUpViewModel.nameUser(it)},

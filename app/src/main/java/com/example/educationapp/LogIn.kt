@@ -23,17 +23,12 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -43,7 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.educationapp.components.HeaderLog
+import com.example.educationapp.components.HeaderLogIn
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.ui.theme.Inter
@@ -81,7 +76,7 @@ fun LogIn(navController: NavController){
             verticalArrangement = Arrangement.Center
 
         ){
-            HeaderLog(text = "Log In",navController)
+            HeaderLogIn(text = "Log In", navController)
 
             OutlinedTextField(value = userViewModel.email.value,
                 onValueChange = { userViewModel.emailUser(it)},

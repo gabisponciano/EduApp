@@ -34,7 +34,7 @@ import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.ui.theme.TextFieldText
 
 @Composable
-fun HeaderLog(text:String,navController: NavController ){
+fun HeaderSign(text:String,navController: NavController ){
     Box(modifier = Modifier
         .fillMaxWidth()
         .padding(20.dp),
@@ -59,32 +59,33 @@ fun HeaderLog(text:String,navController: NavController ){
 }
 
 @Composable
-fun HeaderSign(text: String, navController: NavController){
+fun HeaderLogIn(text: String, navController: NavController){
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(26.dp),
+        .padding(20.dp),
         contentAlignment = Alignment.Center
+
 
     )
     {
-        Column (horizontalAlignment = Alignment.CenterHorizontally){
+        Column (){
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
 
-                Icon(imageVector = Icons.Default.Close,
-                    contentDescription = "",
-                    tint = TextFieldText,
-                    modifier = Modifier.clickable { navController.popBackStack() }
-                )
+//                Icon(imageVector = Icons.Default.Close,
+//                    contentDescription = "",
+//                    tint = TextFieldText,
+//                    modifier = Modifier.clickable { navController.popBackStack() }
+//                )
+                Spacer(modifier = Modifier.width(60.dp))
+                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.Medium, textAlign = TextAlign.Center)
 
-                Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.Medium)
-
-                Text(text = "Login",
+                Text(text = "Sign Up",
                     fontSize = 16.sp,
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium,
                     color = Primary_Green,
                     modifier = Modifier.clickable {
-                        navController.navigate("login")
+                        navController.navigate("signup")
                     })
 
             }
