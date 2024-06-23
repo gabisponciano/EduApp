@@ -19,12 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.educationapp.ui.theme.Inter
 import com.example.educationapp.ui.theme.Primary_Green
 import com.example.educationapp.viewmodels.ProfileViewModel
 
 @Composable
-fun ProfileTopBar(viewModel: ProfileViewModel) {
+fun ProfileTopBar(viewModel: ProfileViewModel, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -40,15 +41,22 @@ fun ProfileTopBar(viewModel: ProfileViewModel) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                    .padding(start = 8.dp, end = 8.dp, top = 16.dp)
             ) {
-                Text(
-                    text = "Settings",
-                    fontSize = 16.sp,
-                    color = Color.White,
-                    fontFamily = Inter,
-                    fontWeight = FontWeight.Normal
-                )
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent
+                    )
+                ) {
+                    Text(
+                        text = "Settings",
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        fontFamily = Inter,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
                 Text(
                     text = "Profile",
                     fontSize = 30.sp,

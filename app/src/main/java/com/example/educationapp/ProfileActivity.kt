@@ -46,6 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.components.CustomToggle
 import com.example.educationapp.components.profile.ProfileContent
 import com.example.educationapp.components.profile.ProfileCurso
@@ -65,19 +67,19 @@ class ProfileActivity : ComponentActivity() {
         setContent {
             EducationAppTheme {
                 val viewModel: ProfileViewModel by viewModels()
-                ProfileActivityLayout(viewModel)
+                ProfileActivityLayout(viewModel, rememberNavController())
             }
         }
     }
 }
 
 @Composable
-fun ProfileActivityLayout(viewModel: ProfileViewModel) {
+fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavController) {
     val selectedOption = remember { mutableStateOf("Posts") }
     Box(modifier = Modifier) {
 
         Column(modifier = Modifier) {
-            ProfileTopBar(viewModel = viewModel)
+            ProfileTopBar(viewModel = viewModel, navController = rememberNavController())
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
@@ -110,12 +112,17 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                         viewModel.setOption(newOption)
                     })
                 Spacer(modifier = Modifier.height(8.dp))
-                CursosContainer(viewModel = viewModel, selectedOption = selectedOption)
+                CursosContainer(viewModel = viewModel)
                 ProfileContent(viewModel = viewModel, selectedOption = selectedOption)
             }
         }
-        Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            BottomBar()
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .background(Color.White)
+        ) {
+            NavApp(navController)
         }
         val density = LocalDensity.current
 
@@ -134,9 +141,8 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                     .alpha(0.5f)
                     .background(Color.Black)
                     .clickable {
-                        viewModel.setModalVisibility(false); viewModel.setBoxVisibility(
-                        false
-                    )
+                        viewModel.setModalVisibility(false)
+                        viewModel.setBoxVisibility(false)
                     }
             )
         }
@@ -167,7 +173,9 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp).fillMaxHeight()
+                        modifier = Modifier
+                            .padding(top = 32.dp, bottom = 32.dp, start = 16.dp, end = 16.dp)
+                            .fillMaxHeight()
                     ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -192,12 +200,14 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Button(
-                                onClick = { /*TODO*/},
+                                onClick = { navController.navigate("login")},
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Primary_Green,
                                     contentColor = Color.White
                                 ),
-                                modifier = Modifier.fillMaxWidth().height(58.dp)
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(58.dp)
                             ) {
                                 Text(
                                     text = "Logout",
@@ -209,7 +219,10 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                             Button(
-                                onClick = { /*TODO*/ },
+                                onClick = {
+                                    viewModel.setModalVisibility(false)
+                                    viewModel.setBoxVisibility(false)
+                                },
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color.Transparent,
                                     contentColor = Primary_Green
@@ -232,64 +245,13 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel) {
 }
 
 @Composable
-fun BottomBar(modifier: Modifier = Modifier) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .background(Color.White)
-    ) {
-        Spacer(modifier = Modifier
-            .height(1.dp)
-            .fillMaxWidth()
-            .background(TextFieldBackground)
-            .align(Alignment.TopStart))
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(38.dp)
-        ) {
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-            Box(modifier = Modifier
-                .height(32.dp)
-                .width(32.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .background(TextFieldBackground)
-            )
-        }
-    }
-}
-
-@Composable
 fun CursosContainer(
-    viewModel: ProfileViewModel,
-    selectedOption: MutableState<String>
+    viewModel: ProfileViewModel
 ) {
     if (viewModel.option.value == "Posts") {
         Column(
             modifier = Modifier
+                .padding(bottom = 70.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             ProfileCurso()
@@ -304,6 +266,6 @@ fun CursosContainer(
 @Composable
 fun ProfileActivityPreview() {
     EducationAppTheme {
-        ProfileActivityLayout(viewModel = ProfileViewModel())
+        ProfileActivityLayout(viewModel = ProfileViewModel(), navController = rememberNavController())
     }
 }
