@@ -9,17 +9,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.educationapp.ui.theme.Inter
-import com.example.educationapp.viewmodels.CourseViewModel
 import com.example.educationapp.viewmodels.NavButtonModelView
 
 data class BottomNavigationItem(
@@ -36,17 +30,16 @@ data class BottomNavigationItem(
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector
 )
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavApp(navController: NavController){
     val navViewModel = viewModel<NavButtonModelView>()
-    var selectedItemIndex by remember {
-        mutableStateOf(0)
-    }
+    //Essas duas Val auxilia para ver qual tela o usuário está vendo no momento
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
+    //Lista para o NavBar
     val items = listOf(
         BottomNavigationItem(
             title = "course",
@@ -69,10 +62,11 @@ fun NavApp(navController: NavController){
             unselectedIcon = Icons.Outlined.CheckCircle
         )
     )
-
+    //Quando rota atual altera, é atualizado o icone que está na NavBar
     LaunchedEffect(currentRoute) {
         navViewModel.selectedItemIndex.value = items.indexOfFirst { it.title == currentRoute }
     }
+    //Criando a NavBar com os respectivos itens
     NavigationBar (modifier = Modifier.height(68.dp)){
         items.forEachIndexed{index, item ->
             NavigationBarItem(
@@ -83,7 +77,6 @@ fun NavApp(navController: NavController){
                         popUpTo(navController.graph.startDestinationId)
                         launchSingleTop = true
                     }
-
                 },
                 label = { Text(text = item.title, fontSize = 14.sp, fontFamily = Inter)},
                 icon = {
@@ -99,13 +92,7 @@ fun NavApp(navController: NavController){
 
         }
     }
-
 }
-
-
-
-
-
 @Preview
 @Composable
 fun ButtonTestPreview(){

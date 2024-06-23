@@ -11,10 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,13 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.educationapp.components.BottomBar
-import com.example.educationapp.components.CustomBox
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
 import com.example.educationapp.components.Slider
 import com.example.educationapp.viewmodels.ClassViewModel
-import com.example.educationapp.viewmodels.SignUpViewModel
 
 @Composable
 fun Classes(navController: NavController) {
@@ -59,7 +52,7 @@ fun Classes(navController: NavController) {
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
-                .background(Color.White) // Adicione um fundo branco para o NavApp se necessário
+                .background(Color.White)
         ) {
             NavApp(navController)
         }

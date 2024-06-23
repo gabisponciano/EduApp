@@ -126,18 +126,7 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
                         navController.navigate("")
                     })
 
-
-
             }
-
         }
     }
-}
-
-
-
-@Preview
-@Composable
-fun HeaderPreview(){
-    //HeaderSign("Sign Up",)
 }

@@ -69,10 +69,6 @@ class LogIn : ComponentActivity() {
 @Composable
 fun LogIn(navController: NavController){
 
-
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
-//    var showPassword by remember { mutableStateOf(false) }
     val userViewModel = viewModel<UserViewModel>()
     val context = LocalContext.current
     Box(modifier = Modifier
@@ -170,8 +166,6 @@ fun LogIn(navController: NavController){
                 color = Primary_Green
 
             )
-
-
 
         }
 

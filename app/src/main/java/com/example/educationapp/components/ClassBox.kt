@@ -55,24 +55,21 @@ data class CustomBox(
 fun Slider(navController: NavController){
     val boxModelView = viewModel<ClassBoxModelView>()
     val customBoxes = boxModelView.customBoxes
-//    var allChecked by remember { mutableStateOf(false) }
-//perform asynchronous tasks in a Composable function
-//    LaunchedEffect(customBoxes) {
-//        boxModelView.markAllCheck(customBoxes)
-//    }
+   //Para conseguir deslizar
     LazyRow (
         modifier = Modifier
             .fillMaxWidth()
             .padding(5.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(customBoxes){ box ->
+        //Quando a caixa é marcada ou desmarcada, atualiza o estado na ViewModel
+        items(customBoxes){ box -> // Cada item da lista é representada pela box
             BoxCheck(box){updatedBox, isChecked ->
-                boxModelView.updateBoxCheck(updatedBox, isChecked)
+                boxModelView.updateBoxCheck(updatedBox, isChecked)// Atualiza o estado da box
             }
         }
     }
-
+    //Quando todas marcadas, aparece o botão de certificado
     if (boxModelView.allChecked.value){
         Button(onClick = { navController.navigate("certificate") },
             colors = ButtonDefaults.buttonColors(containerColor = Primary_Green),
@@ -104,19 +101,17 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
                     .background(Color.Transparent)
                     .fillMaxWidth()
                     .height(40.dp),
-                    //contentAlignment = Alignment.CenterEnd
                 ){
                     Row(verticalAlignment = Alignment.CenterVertically){
                         Checkbox(
-                            //Mudar aqui a implementção de quando estiver marcada vai sempre estar
+                            //Aqui quando marcada não desmarca mais
                             checked = isChecked,
-                            onCheckedChange = { checked ->//Quando eu clico não é automatico
+                            onCheckedChange = { checked ->
                                 if (!isChecked) {
                                     isChecked = checked
                                     onCheckedChange(box, checked)
                                 }
                                 }
-
 
                         )
 
@@ -129,7 +124,6 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
                         Spacer(modifier = Modifier.width(150.dp))
 
                     }
-//
 
                 }
             }
@@ -168,10 +162,5 @@ fun BoxCheck(box: CustomBox, onCheckedChange:(CustomBox, Boolean)->Unit){
 @Composable
 fun SliderPreview(){
     val navController = rememberNavController()
-    val customBoxes = remember {
-        mutableListOf(
-            CustomBox("Box 1", "Description 1"),
-            CustomBox("Box 2", "Description 2"),
-            CustomBox("Box 3", "Description 3"))}
     Slider(navController)
 }

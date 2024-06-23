@@ -18,12 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,13 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.educationapp.components.BottomBar
 import com.example.educationapp.components.HeaderCourse
 import com.example.educationapp.components.SearchBarUi
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.EducationAppTheme
 import com.example.educationapp.viewmodels.CourseViewModel
-import com.example.educationapp.viewmodels.SignUpViewModel
 
 class Course : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +50,6 @@ class Course : ComponentActivity() {
 @Composable
 fun Course(navController: NavController){
 
-    //var query by remember { mutableStateOf("") }
     val courseUpViewModel = viewModel<CourseViewModel>()
     Box(modifier = Modifier.fillMaxSize().background(Color.White)){
         Column (modifier = Modifier

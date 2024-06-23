@@ -74,15 +74,8 @@ class SignUp : ComponentActivity() {
 
 @Composable
 fun SignUp(navController: NavController){
-//    var name by remember { mutableStateOf("") }
-//    var email by remember { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
-//    var showPassword by remember { mutableStateOf(false) }
-//    var check by remember { mutableStateOf(false) }
-
     val signUpViewModel = viewModel<SignUpViewModel>()
     val context = LocalContext.current
-
 
     Box(modifier = Modifier
         .fillMaxSize()
@@ -215,8 +208,6 @@ fun SignUp(navController: NavController){
                 color = Primary_Green
 
             )
-
-
 
         }
 

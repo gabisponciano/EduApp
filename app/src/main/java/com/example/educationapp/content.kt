@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.educationapp.ui.theme.BackField
 import com.example.educationapp.ui.theme.Inter
-
+//Cursos de aulas
 @Composable
 fun Content(
     title: String,
@@ -37,7 +36,6 @@ fun Content(
     boxSizeH: Dp =50.dp,
     cornerRadius: Dp = 10.dp,
     spacing: Dp = 28.dp,
-    rowWidth: Dp = 320.dp,
     @DrawableRes image: Int,
     navController: NavController,
     modifier: Modifier
@@ -111,11 +109,8 @@ fun ConteudoAula(title: String, description: String){
 
     }
 }
-
-
-
 @Preview
 @Composable
 fun ConteudoAula(){
-    ConteudoAula(title = " Não sei", description = "cnjkndkjbf,vfj")
+    ConteudoAula(title = "Title", description = "description")
 }

@@ -12,6 +12,7 @@ class ClassBoxModelView: ViewModel() {
     private val _allCheck = mutableStateOf<Boolean>(false)
     val allChecked: MutableState<Boolean> = _allCheck
 
+    //Lista de Box
     private val _customBoxes = mutableStateListOf(
         CustomBox("Python 01", "Introduction"),
         CustomBox("Python 02", "OOP"),
@@ -24,6 +25,7 @@ class ClassBoxModelView: ViewModel() {
     fun markAllCheck(){
         _allCheck.value =_customBoxes.all {it.isChecked}
     }
+    // Atualiza o estado de uma box da lista
     fun updateBoxCheck(box: CustomBox, isChecked: Boolean) {
         val index = _customBoxes.indexOf(box)
         if (index != -1) {
