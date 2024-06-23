@@ -112,9 +112,11 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium,
                     color = Primary_Green,
+                    maxLines = 1,
                     modifier = Modifier.clickable {
                         navController.popBackStack()
-                    })
+                    }
+                )
                 Spacer(modifier = Modifier.width(80.dp))
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.width(76.dp))
@@ -123,10 +125,11 @@ fun HeaderCourse(text: String, navController: NavController, title: String){
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium,
                     color = Primary_Green,
+                    maxLines = 1,
                     modifier = Modifier.clickable {
                         navController.navigate("")
-                    })
-
+                    }
+                )
             }
         }
     }

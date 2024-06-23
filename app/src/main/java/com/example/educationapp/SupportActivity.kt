@@ -99,7 +99,7 @@ fun SupportActivityLayout(
                     color = Primary_Green,
                     fontFamily = Inter,
                     fontWeight = FontWeight.Medium,
-                    modifier = Modifier.clickable { navController.popBackStack() }
+                    modifier = Modifier.clickable { navController.navigate("course") }
                 )
                 Text(
                     text = "Profile",

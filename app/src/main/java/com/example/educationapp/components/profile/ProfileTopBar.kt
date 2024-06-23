@@ -41,15 +41,22 @@ fun ProfileTopBar(viewModel: ProfileViewModel, navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                    .padding(start = 8.dp, end = 8.dp, top = 16.dp)
             ) {
-                Text(
-                    text = "Settings",
-                    fontSize = 16.sp,
-                    color = Color.White,
-                    fontFamily = Inter,
-                    fontWeight = FontWeight.Normal
-                )
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.Transparent
+                    )
+                ) {
+                    Text(
+                        text = "Settings",
+                        fontSize = 16.sp,
+                        color = Color.White,
+                        fontFamily = Inter,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
                 Text(
                     text = "Profile",
                     fontSize = 30.sp,

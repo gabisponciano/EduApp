@@ -58,7 +58,7 @@ fun Course(navController: NavController){
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally){
 
-            HeaderCourse(text = "Course" , navController, title = "Log Out")
+            HeaderCourse(text = "Course" , navController, title = "Logout")
 
             SearchBarUi(query = courseUpViewModel.query.value,
                 onQueryChange = {courseUpViewModel.queryUser(it)},

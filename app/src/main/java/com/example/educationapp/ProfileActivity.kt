@@ -112,12 +112,17 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavControl
                         viewModel.setOption(newOption)
                     })
                 Spacer(modifier = Modifier.height(8.dp))
-                CursosContainer(viewModel = viewModel, selectedOption = selectedOption)
+                CursosContainer(viewModel = viewModel)
                 ProfileContent(viewModel = viewModel, selectedOption = selectedOption)
             }
         }
-        Box(modifier = Modifier.align(Alignment.BottomCenter)) {
-            NavApp(navController = rememberNavController())
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .background(Color.White)
+        ) {
+            NavApp(navController)
         }
         val density = LocalDensity.current
 
@@ -136,9 +141,8 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavControl
                     .alpha(0.5f)
                     .background(Color.Black)
                     .clickable {
-                        viewModel.setModalVisibility(false); viewModel.setBoxVisibility(
-                        false
-                    )
+                        viewModel.setModalVisibility(false)
+                        viewModel.setBoxVisibility(false)
                     }
             )
         }
@@ -215,7 +219,10 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavControl
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                             Button(
-                                onClick = { /*TODO*/ },
+                                onClick = {
+                                    viewModel.setModalVisibility(false)
+                                    viewModel.setBoxVisibility(false)
+                                },
                                 colors = ButtonDefaults.buttonColors(
                                     containerColor = Color.Transparent,
                                     contentColor = Primary_Green
@@ -239,12 +246,12 @@ fun ProfileActivityLayout(viewModel: ProfileViewModel, navController: NavControl
 
 @Composable
 fun CursosContainer(
-    viewModel: ProfileViewModel,
-    selectedOption: MutableState<String>
+    viewModel: ProfileViewModel
 ) {
     if (viewModel.option.value == "Posts") {
         Column(
             modifier = Modifier
+                .padding(bottom = 70.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             ProfileCurso()
