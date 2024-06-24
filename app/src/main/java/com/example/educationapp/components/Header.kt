@@ -71,11 +71,6 @@ fun HeaderLogIn(text: String, navController: NavController){
         Column (){
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()){
 
-//                Icon(imageVector = Icons.Default.Close,
-//                    contentDescription = "",
-//                    tint = TextFieldText,
-//                    modifier = Modifier.clickable { navController.popBackStack() }
-//                )
                 Spacer(modifier = Modifier.width(60.dp))
                 Text(text, fontSize =30.sp, fontFamily = Inter, fontWeight = FontWeight.Medium, textAlign = TextAlign.Center)
 

@@ -1,6 +1,7 @@
 package com.example.educationapp
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -36,7 +37,7 @@ fun Classes(navController: NavController) {
                 .padding(bottom = 70.dp), // Adiciona espaço para o NavApp
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            HeaderCourse(text = "Classes", navController, title = "Back")
+            HeaderCourse(text = "Classes", navController, title = "Logout")
 
             SearchBarUi(
                 query = classViewModel.query.value,
